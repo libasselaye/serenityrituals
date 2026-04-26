@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SerenityRituals — Soins énergétiques et vibratoires</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1c2340; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #1a6fba22; color: #1a6fba; }
+
+    /* Responsive helpers */
+    @media (max-width: 768px) {
+      .hero-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .desktop-nav, .desktop-cta { display: none !important; }
+      .hamburger { display: flex !important; }
+      .process-line { left: 28px !important; }
+      .tusens-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important; }
+      .hero-content { padding: 0 24px !important; }
+      .hero-content > div { max-width: 100% !important; }
+    }
+    @media (max-width: 480px) {
+      .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 540px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(26,63,186,0.12) !important;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 2px;
+      background: #1a6fba;
+      border-radius: 1px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link:hover { color: #1a6fba !important; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #1a6fba40; border-radius: 3px; }
+  </style>
+  <template id="__bundler_thumbnail" data-bg-color="#fafcff">
+    <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="260" fill="#fafcff"/>
+      <circle cx="200" cy="120" r="80" fill="#1a6fba" fill-opacity="0.07"/>
+      <circle cx="200" cy="120" r="55" stroke="#1a6fba" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+      <circle cx="200" cy="120" r="35" stroke="#1a6fba" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+      <circle cx="200" cy="120" r="18" fill="#e8b43a" fill-opacity="0.25"/>
+      <circle cx="200" cy="120" r="9" fill="#e8b43a" fill-opacity="0.6"/>
+      <circle cx="200" cy="120" r="4" fill="#e8b43a"/>
+      <line x1="200" y1="102" x2="200" y2="85" stroke="#e8b43a" stroke-width="1" stroke-opacity="0.5"/>
+      <line x1="200" y1="138" x2="200" y2="155" stroke="#e8b43a" stroke-width="1" stroke-opacity="0.5"/>
+      <line x1="182" y1="120" x2="165" y2="120" stroke="#e8b43a" stroke-width="1" stroke-opacity="0.5"/>
+      <line x1="218" y1="120" x2="235" y2="120" stroke="#e8b43a" stroke-width="1" stroke-opacity="0.5"/>
+      <text x="200" y="215" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#1a6fba" font-style="italic">SerenityRituals</text>
+    </svg>
+  </template>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="sr-header.jsx"></script>
+  <script type="text/babel" src="sr-sections1.jsx"></script>
+  <script type="text/babel" src="sr-sections2.jsx"></script>
+  <script type="text/babel" src="sr-contact.jsx"></script>
+
+  <script type="text/babel">
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "blue": "#0038C7",
+      "gold": "#FFB800",
+      "roundness": 24,
+      "heroStyle": "gradient"
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [tv, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      const colors = { blue: tv.blue, gold: tv.gold };
+
+      return (
+        <>
+          <Header colors={colors}/>
+          <main style={{ paddingTop: 0 }}>
+            <Hero colors={colors}/>
+            <TuSens colors={colors}/>
+            <About colors={colors}/>
+            <Services colors={colors}/>
+            <ForWho colors={colors}/>
+            <Process colors={colors}/>
+            <Benefits colors={colors}/>
+            <Testimonials colors={colors}/>
+            <FAQ colors={colors}/>
+            <Contact colors={colors}/>
+          </main>
+          <Footer colors={colors}/>
+          <TweaksPanel>
+            <TweakSection label="Couleurs">
+              <TweakColor id="blue" label="Bleu Santorin"/>
+              <TweakColor id="gold" label="Jaune soleil"/>
+            </TweakSection>
+            <TweakSection label="Design">
+              <TweakSlider id="roundness" label="Arrondis des cartes" min={8} max={36} step={2}/>
+            </TweakSection>
+          </TweaksPanel>
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App/>);
+  </script>
+</body>
+</html>
