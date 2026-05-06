@@ -86,7 +86,7 @@ function Process({ colors }) {
             fontSize: "clamp(2rem, 3.2vw, 3rem)", fontWeight: 600,
             color: "#1c2340", margin: "0 0 20px", lineHeight: 1.2 }}>
             Une approche qui s'adapte à toi,{" "}
-            <em style={{ color: gold, fontStyle: "italic" }}>à ton rythme.</em>
+            <em style={{ color: blue, fontStyle: "italic" }}>à ton rythme.</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
             color: "#6b7280", maxWidth: 520, margin: "0 auto 10px", lineHeight: 1.75 }}>
