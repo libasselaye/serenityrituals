@@ -282,20 +282,44 @@ function TuSens({ colors }) {
 function Problem({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
+  const bg = "#faf9f6";
 
   return (
-    <section style={{
-      background: "#faf9f6",
-      position: "relative",
-      overflow: "hidden",
-    }}>
+    <section style={{ background: bg, position: "relative", overflow: "hidden" }}>
+      {/* Image pleine hauteur à droite, absolue */}
       <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr",
-        alignItems: "stretch", minHeight: 560,
-      }} className="hero-grid">
+        position: "absolute", top: 0, right: 0, bottom: 0, width: "52%",
+        overflow: "hidden",
+      }}>
+        <img
+          src="img/homepage_img.png"
+          alt="Séance d'harmonisation énergétique"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "35% center", display: "block" }}
+        />
+        {/* Fondu gauche — émergence depuis le fond crème */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: `linear-gradient(to right,
+            ${bg} 0%,
+            rgba(250,249,246,0.92) 10%,
+            rgba(250,249,246,0.55) 28%,
+            rgba(250,249,246,0.15) 45%,
+            transparent 62%)`,
+        }}/>
+        {/* Fondu bas */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: 80, pointerEvents: "none",
+          background: `linear-gradient(to bottom, transparent, ${bg})`,
+        }}/>
+      </div>
 
-        {/* Colonne texte */}
-        <div style={{ padding: "80px 56px 80px 64px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      {/* Contenu texte */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 2 }}>
+        <div style={{
+          maxWidth: 520,
+          padding: "96px 0 96px",
+          display: "flex", flexDirection: "column",
+        }}>
           {/* Badge */}
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8,
@@ -311,23 +335,23 @@ function Problem({ colors }) {
           {/* Heading */}
           <h2 style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(1.9rem, 3vw, 2.8rem)",
+            fontSize: "clamp(2rem, 3.2vw, 3rem)",
             fontWeight: 600, color: "#1c2340",
-            lineHeight: 1.25, marginBottom: 40,
+            lineHeight: 1.2, marginBottom: 44,
           }}>
             Il y a des choses que l'on ne peut pas débloquer en{" "}
             <em style={{ color: blue, fontStyle: "italic" }}>réfléchissant plus.</em>
           </h2>
 
           {/* Bullets */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
 
             {/* Bullet 1 */}
             <div style={{ display: "flex", gap: 18, alignItems: "flex-start" }}>
               <div style={{
-                flexShrink: 0, width: 46, height: 46, borderRadius: "50%",
+                flexShrink: 0, width: 48, height: 48, borderRadius: "50%",
                 background: "#fff", border: `1px solid ${gold}30`,
-                boxShadow: `0 2px 12px ${gold}20`,
+                boxShadow: `0 2px 16px ${gold}22`,
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -338,7 +362,7 @@ function Problem({ colors }) {
                 </svg>
               </div>
               <div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.92rem", marginBottom: 5 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.93rem", marginBottom: 5 }}>
                   Ce qui freine se situe parfois plus profondément.
                 </p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#5a6478", fontSize: "0.86rem", lineHeight: 1.75 }}>
@@ -350,9 +374,9 @@ function Problem({ colors }) {
             {/* Bullet 2 */}
             <div style={{ display: "flex", gap: 18, alignItems: "flex-start" }}>
               <div style={{
-                flexShrink: 0, width: 46, height: 46, borderRadius: "50%",
+                flexShrink: 0, width: 48, height: 48, borderRadius: "50%",
                 background: "#fff", border: `1px solid ${gold}30`,
-                boxShadow: `0 2px 12px ${gold}20`,
+                boxShadow: `0 2px 16px ${gold}22`,
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -360,7 +384,7 @@ function Problem({ colors }) {
                 </svg>
               </div>
               <div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.92rem", marginBottom: 5 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.93rem", marginBottom: 5 }}>
                   C'est là que j'interviens.
                 </p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#5a6478", fontSize: "0.86rem", lineHeight: 1.75 }}>
@@ -369,15 +393,6 @@ function Problem({ colors }) {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Colonne image */}
-        <div style={{ display: "flex", alignItems: "flex-end" }}>
-          <img
-            src="img/homepage_img.png"
-            alt="Séance d'harmonisation énergétique"
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
         </div>
       </div>
     </section>
