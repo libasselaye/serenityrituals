@@ -285,51 +285,52 @@ function Problem({ colors }) {
 
   return (
     <section style={{
-      background: "#111827",
-      padding: "100px 24px",
+      background: "#faf9f6",
       position: "relative",
       overflow: "hidden",
     }}>
       <div style={{
-        maxWidth: 1200, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
-        gap: 64, alignItems: "center",
+        alignItems: "stretch", minHeight: 560,
       }} className="hero-grid">
 
         {/* Colonne texte */}
-        <div>
+        <div style={{ padding: "80px 56px 80px 64px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           {/* Badge */}
           <div style={{
-            display: "inline-block",
-            background: `${gold}18`, border: `1px solid ${gold}40`,
-            color: gold, fontSize: "0.65rem", fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-            padding: "6px 14px", borderRadius: 50, marginBottom: 28,
+            display: "inline-flex", alignItems: "center", gap: 8,
+            border: `1px solid ${gold}80`,
+            color: gold, fontSize: "0.6rem", fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase",
+            padding: "5px 12px", borderRadius: 50, marginBottom: 28, alignSelf: "flex-start",
           }}>
+            <span style={{ fontSize: "0.7rem" }}>✦</span>
             Et si le problème n'était pas ce que tu crois…
           </div>
 
           {/* Heading */}
           <h2 style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(2rem, 3.5vw, 3rem)",
-            fontWeight: 600, color: "#fff",
-            lineHeight: 1.2, marginBottom: 40,
+            fontSize: "clamp(1.9rem, 3vw, 2.8rem)",
+            fontWeight: 600, color: "#1c2340",
+            lineHeight: 1.25, marginBottom: 40,
           }}>
-            Il y a des choses que l'on ne peut pas débloquer{" "}
-            <em style={{ color: gold, fontStyle: "italic" }}>en réfléchissant plus.</em>
+            Il y a des choses que l'on ne peut pas débloquer en{" "}
+            <em style={{ color: blue, fontStyle: "italic" }}>réfléchissant plus.</em>
           </h2>
 
           {/* Bullets */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
 
             {/* Bullet 1 */}
-            <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+            <div style={{ display: "flex", gap: 18, alignItems: "flex-start" }}>
               <div style={{
-                flexShrink: 0, width: 44, height: 44, borderRadius: "50%",
-                background: `${gold}18`, display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0, width: 46, height: 46, borderRadius: "50%",
+                background: "#fff", border: `1px solid ${gold}30`,
+                boxShadow: `0 2px 12px ${gold}20`,
+                display: "flex", alignItems: "center", justifyContent: "center",
               }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v1A2.5 2.5 0 0 1 9.5 8h-1A2.5 2.5 0 0 0 6 10.5v.5"/>
                   <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v1A2.5 2.5 0 0 0 14.5 8h1A2.5 2.5 0 0 1 18 10.5v.5"/>
                   <path d="M6 11a6 6 0 0 0 12 0"/>
@@ -337,33 +338,32 @@ function Problem({ colors }) {
                 </svg>
               </div>
               <div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#fff", fontSize: "0.95rem", marginBottom: 6 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.92rem", marginBottom: 5 }}>
                   Ce qui freine se situe parfois plus profondément.
                 </p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.6)", fontSize: "0.88rem", lineHeight: 1.7 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#5a6478", fontSize: "0.86rem", lineHeight: 1.75 }}>
                   Des tensions accumulées, des émotions non libérées, une énergie qui ne circule plus librement dans ton système.
                 </p>
               </div>
             </div>
 
             {/* Bullet 2 */}
-            <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+            <div style={{ display: "flex", gap: 18, alignItems: "flex-start" }}>
               <div style={{
-                flexShrink: 0, width: 44, height: 44, borderRadius: "50%",
-                background: `${gold}18`, display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0, width: 46, height: 46, borderRadius: "50%",
+                background: "#fff", border: `1px solid ${gold}30`,
+                boxShadow: `0 2px 12px ${gold}20`,
+                display: "flex", alignItems: "center", justifyContent: "center",
               }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/>
-                  <path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/>
-                  <path d="M10 10.5V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v8"/>
-                  <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
               </div>
               <div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#fff", fontSize: "0.95rem", marginBottom: 6 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "#1c2340", fontSize: "0.92rem", marginBottom: 5 }}>
                   C'est là que j'interviens.
                 </p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.6)", fontSize: "0.88rem", lineHeight: 1.7 }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#5a6478", fontSize: "0.86rem", lineHeight: 1.75 }}>
                   Je travaille directement là où ton énergie est figée, pour remettre en mouvement ce qui s'est arrêté, et t'aider à retrouver clarté, apaisement et élan.
                 </p>
               </div>
@@ -372,23 +372,47 @@ function Problem({ colors }) {
         </div>
 
         {/* Colonne image */}
-        <div style={{ position: "relative" }}>
-          <div style={{
-            position: "absolute", inset: -20, borderRadius: 24,
-            background: `radial-gradient(ellipse at center, ${gold}20 0%, transparent 70%)`,
-            pointerEvents: "none",
-          }}/>
+        <div style={{ position: "relative", overflow: "hidden", minHeight: 520 }}>
           <img
             src="img/homepage_img.png"
             alt="Séance d'harmonisation énergétique"
             style={{
-              width: "100%", height: 520, objectFit: "cover",
-              objectPosition: "center top",
-              borderRadius: 20,
+              position: "absolute", inset: 0,
+              width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: "center top",
               display: "block",
-              boxShadow: `0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px ${gold}20`,
             }}
           />
+          {/* Overlay warm golden */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(135deg, rgba(232,180,58,0.18) 0%, rgba(180,120,20,0.08) 100%)",
+            pointerEvents: "none",
+          }}/>
+          {/* Géométrie sacrée SVG */}
+          <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.45, pointerEvents: "none" }}
+            viewBox="0 0 500 560" preserveAspectRatio="xMidYMid meet">
+            {[40, 80, 120, 160, 200, 240].map((r, i) => (
+              <circle key={i} cx="250" cy="280" r={r} fill="none" stroke="#e8b43a" strokeWidth="0.6"/>
+            ))}
+            {[0,30,60,90,120,150,180,210,240,270,300,330].map((deg, i) => {
+              const rad = deg * Math.PI / 180;
+              return <line key={i} x1="250" y1="280"
+                x2={250 + Math.cos(rad) * 240} y2={280 + Math.sin(rad) * 240}
+                stroke="#e8b43a" strokeWidth="0.4"/>;
+            })}
+            {[0,45,90,135,180,225,270,315].map((deg, i) => {
+              const rad = deg * Math.PI / 180;
+              return <circle key={i} cx={250 + Math.cos(rad) * 160} cy={280 + Math.sin(rad) * 160}
+                r="2.5" fill="#e8b43a" opacity="0.8"/>;
+            })}
+          </svg>
+          {/* Fondu gauche pour liaison avec le texte */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, #faf9f6 0%, transparent 18%)",
+            pointerEvents: "none",
+          }}/>
         </div>
       </div>
     </section>
