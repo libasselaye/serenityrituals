@@ -100,7 +100,7 @@ function Process({ colors }) {
 
         {/* 3 colonnes */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}
-          className="tusens-grid">
+          className="approach-grid">
           {tiers.map((t, i) => (
             <RevealBox key={i} delay={i * 120}>
               <div style={{
@@ -153,9 +153,9 @@ function Process({ colors }) {
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
             fontWeight: 500, color: "#1c2340", margin: "0 0 28px", lineHeight: 1.35 }}>
             Tu peux commencer simplement…<br/>
-            et aller <em style={{ color: gold, fontStyle: "italic" }}>aussi loin que tu le souhaites.</em>
+            et aller <em style={{ color: blue, fontStyle: "italic" }}>aussi loin que tu le souhaites.</em>
           </p>
-          <a href={window.CALENDLY_URL || "#soins"} target="_blank" rel="noreferrer"
+          <a href="#soins" onClick={e => { e.preventDefault(); const el = document.querySelector('#soins'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } }}
             style={{ background: blue, color: "#fff", padding: "13px 32px",
               borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
               fontSize: "0.88rem", textDecoration: "none", display: "inline-block",
