@@ -372,47 +372,12 @@ function Problem({ colors }) {
         </div>
 
         {/* Colonne image */}
-        <div style={{ position: "relative", overflow: "hidden", minHeight: 520 }}>
+        <div style={{ display: "flex", alignItems: "flex-end" }}>
           <img
             src="img/homepage_img.png"
             alt="Séance d'harmonisation énergétique"
-            style={{
-              position: "absolute", inset: 0,
-              width: "100%", height: "100%",
-              objectFit: "cover", objectPosition: "30% center",
-              display: "block",
-            }}
+            style={{ width: "100%", height: "auto", display: "block" }}
           />
-          {/* Overlay warm golden */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(135deg, rgba(232,180,58,0.18) 0%, rgba(180,120,20,0.08) 100%)",
-            pointerEvents: "none",
-          }}/>
-          {/* Géométrie sacrée SVG */}
-          <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.45, pointerEvents: "none" }}
-            viewBox="0 0 500 560" preserveAspectRatio="xMidYMid meet">
-            {[40, 80, 120, 160, 200, 240].map((r, i) => (
-              <circle key={i} cx="250" cy="280" r={r} fill="none" stroke="#e8b43a" strokeWidth="0.6"/>
-            ))}
-            {[0,30,60,90,120,150,180,210,240,270,300,330].map((deg, i) => {
-              const rad = deg * Math.PI / 180;
-              return <line key={i} x1="250" y1="280"
-                x2={250 + Math.cos(rad) * 240} y2={280 + Math.sin(rad) * 240}
-                stroke="#e8b43a" strokeWidth="0.4"/>;
-            })}
-            {[0,45,90,135,180,225,270,315].map((deg, i) => {
-              const rad = deg * Math.PI / 180;
-              return <circle key={i} cx={250 + Math.cos(rad) * 160} cy={280 + Math.sin(rad) * 160}
-                r="2.5" fill="#e8b43a" opacity="0.8"/>;
-            })}
-          </svg>
-          {/* Fondu gauche pour liaison avec le texte */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to right, #faf9f6 0%, transparent 18%)",
-            pointerEvents: "none",
-          }}/>
         </div>
       </div>
     </section>
