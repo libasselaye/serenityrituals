@@ -1,82 +1,169 @@
 
 // SerenityRituals — Déroulement, Bienfaits, Témoignages, FAQ
 
-// ─── DÉROULEMENT ─────────────────────────────────────────────────────────────
+// ─── MON APPROCHE ─────────────────────────────────────────────────────────────
 function Process({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
-  const steps = [
-    { n: "01", title: "Prise de contact", desc: "Vous réservez votre séance via Calendly ou prenez contact par email ou Instagram." },
-    { n: "02", title: "Échange initial", desc: "Un temps d'échange permet de comprendre votre besoin du moment et de poser une intention pour la séance." },
-    { n: "03", title: "Soin énergétique ou vibratoire", desc: "La séance se déroule dans un cadre calme, bienveillant et respectueux de votre rythme." },
-    { n: "04", title: "Retour après séance", desc: "Un temps de retour permet de partager les ressentis et d'intégrer l'expérience en douceur." },
-    { n: "05", title: "Suivi si nécessaire", desc: "Selon vos besoins, un accompagnement ponctuel ou un pack one-to-one peut être proposé." },
+  const tiers = [
+    {
+      num: "1",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
+          <circle cx="28" cy="28" r="10" stroke={gold} strokeWidth="1.5"/>
+          {[0,45,90,135,180,225,270,315].map((deg,i) => {
+            const r = deg * Math.PI / 180;
+            return <line key={i} x1={28+Math.cos(r)*13} y1={28+Math.sin(r)*13}
+              x2={28+Math.cos(r)*20} y2={28+Math.sin(r)*20}
+              stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>;
+          })}
+        </svg>
+      ),
+      title: "Les soins à l'unité",
+      sub: "UN PREMIER PAS, AVEC DÉJÀ DES EFFETS CONCRETS",
+      bullets: [
+        "Tu peux commencer simplement, avec une séance de Trame ou une Kundalini Activation.",
+        "Dès la première séance, des changements peuvent se faire ressentir : un apaisement, un relâchement, plus de clarté.",
+        "Chaque séance agit là où ton système en a besoin et ouvre déjà un espace différent en toi.",
+      ],
+    },
+    {
+      num: "2",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
+          <path d="M28 14 C36 14 42 20 42 28 C42 36 36 42 28 42 C22 42 17 38 16 32" stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M28 20 C33 20 37 24 37 28 C37 32 33 36 28 36" stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="28" cy="28" r="3" fill={gold}/>
+        </svg>
+      ),
+      title: "Aller plus loin, quand tu es prêt(e)",
+      sub: "APPROFONDIR POUR TRANSFORMER",
+      bullets: [
+        "Au fil des séances, le travail s'approfondit.",
+        "Ton corps s'ouvre, ton énergie circule différemment.",
+        "Les blocages se relâchent en profondeur, les émotions se libèrent, et tu retrouves de plus en plus de clarté, de confiance et d'élan.",
+        "De vrais changements commencent à s'installer.",
+      ],
+    },
+    {
+      num: "3",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
+          <path d="M28 12 L30.5 24 L43 28 L30.5 32 L28 44 L25.5 32 L13 28 L25.5 24 Z" stroke={gold} strokeWidth="1.5" strokeLinejoin="round"/>
+        </svg>
+      ),
+      title: "Un accompagnement plus complet",
+      sub: "COMBINER POUR ACCÉLÉRER ET STABILISER",
+      bullets: [
+        "Pour celles et ceux qui souhaitent aller plus loin, je propose un accompagnement en 3 semaines qui combine plusieurs approches, dont la Dream Machine.",
+        "Cette synergie permet d'accélérer le processus, d'intégrer durablement les transformations et d'ancrer les changements dans ton quotidien.",
+      ],
+    },
   ];
 
   return (
-    <section id="deroulement" style={{ padding: "100px 24px", background: "#f6f9ff" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+    <section id="deroulement" style={{ padding: "96px 24px 80px", background: "#fff", position: "relative", overflow: "hidden" }}>
+      {/* Décor feuille droite */}
+      <div style={{ position: "absolute", right: -40, top: "50%", transform: "translateY(-50%)", opacity: 0.07, pointerEvents: "none" }}>
+        <svg width="280" height="380" viewBox="0 0 280 380" fill="none">
+          <path d="M140 10 C200 60 260 140 240 220 C220 300 160 360 140 370 C120 360 60 300 40 220 C20 140 80 60 140 10Z" fill={gold}/>
+          <line x1="140" y1="10" x2="140" y2="370" stroke={gold} strokeWidth="2"/>
+          {[60,100,140,180,220,260,300,340].map((y,i) => (
+            <path key={i} d={`M140 ${y} Q${i%2===0?180:100} ${y-20} ${i%2===0?220:60} ${y}`} stroke={gold} strokeWidth="1" fill="none"/>
+          ))}
+        </svg>
+      </div>
+
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        {/* Header */}
         <RevealBox style={{ textAlign: "center", marginBottom: 64 }}>
-          <div style={{ display: "inline-block", width: 44, height: 3,
-            background: `linear-gradient(90deg, ${blue}, ${gold})`,
-            borderRadius: 2, marginBottom: 20 }}/>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Mon approche
+          </div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#1c2340", margin: "0 0 16px" }}>
-            Comment se déroule une séance ?
+            fontSize: "clamp(2rem, 3.2vw, 3rem)", fontWeight: 600,
+            color: "#1c2340", margin: "0 0 20px", lineHeight: 1.2 }}>
+            Une approche qui s'adapte à toi,{" "}
+            <em style={{ color: gold, fontStyle: "italic" }}>à ton rythme.</em>
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
-            color: "#6b7280", maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-            Un parcours simple et bienveillant, pensé pour vous accueillir en douceur.
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+            color: "#6b7280", maxWidth: 520, margin: "0 auto 10px", lineHeight: 1.75 }}>
+            Il n'existe pas un seul chemin pour se libérer. Certaines personnes ont besoin de douceur, d'autres sont prêtes à aller plus loin, plus vite.
+          </p>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+            color: "#6b7280", maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
+            Mon rôle, c'est de m'adapter à là où tu en es, et de t'accompagner étape par étape.
           </p>
         </RevealBox>
 
-        <div style={{ position: "relative" }}>
-          {/* Vertical line */}
-          <div style={{ position: "absolute", left: 36, top: 24, bottom: 24,
-            width: 2, background: `linear-gradient(180deg, ${blue}30, ${gold}30)`,
-            borderRadius: 1 }} className="process-line"/>
-
-          {steps.map((s, i) => (
-            <RevealBox key={s.n} delay={i * 100}>
-              <div style={{ display: "flex", gap: 28, marginBottom: 36, alignItems: "flex-start" }}>
-                <div style={{ flexShrink: 0, width: 72, height: 72, borderRadius: "50%",
-                  background: "white", border: `2px solid ${i === 0 ? blue : `${blue}30`}`,
-                  display: "flex", flexDirection: "column", alignItems: "center",
-                  justifyContent: "center", boxShadow: `0 4px 16px ${blue}12`,
-                  transition: "border-color 0.3s", zIndex: 1 }}>
-                  <span style={{ fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.3rem", fontWeight: 700, color: blue, lineHeight: 1 }}>
-                    {s.n}
-                  </span>
+        {/* 3 colonnes */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}
+          className="tusens-grid">
+          {tiers.map((t, i) => (
+            <RevealBox key={i} delay={i * 120}>
+              <div style={{
+                padding: "36px 28px 32px",
+                borderRadius: 20,
+                border: "1px solid rgba(26,111,186,0.08)",
+                background: "#fff",
+                boxShadow: "0 4px 24px rgba(26,63,186,0.05)",
+                height: "100%", display: "flex", flexDirection: "column", gap: 0,
+              }}>
+                {/* Numéro + icone */}
+                <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
+                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem",
+                    fontWeight: 700, color: `${gold}50`, lineHeight: 1 }}>{t.num}</span>
+                  {t.icon}
                 </div>
-                <div style={{ background: "white", borderRadius: 18, padding: "22px 28px",
-                  flex: 1, boxShadow: "0 4px 20px rgba(26,63,186,0.05)",
-                  border: "1px solid rgba(26,111,186,0.07)" }}>
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.25rem",
-                    fontWeight: 600, color: "#1c2340", margin: "0 0 8px" }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-                    color: "#6b7280", lineHeight: 1.7, margin: 0 }}>
-                    {s.desc}
-                  </p>
-                </div>
+                {/* Titre */}
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem",
+                  fontWeight: 600, color: "#1c2340", margin: "0 0 8px", lineHeight: 1.25 }}>
+                  {t.title}
+                </h3>
+                {/* Sous-titre */}
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6rem",
+                  fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+                  color: blue, margin: "0 0 20px" }}>
+                  {t.sub}
+                </p>
+                {/* Puces */}
+                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+                  {t.bullets.map((b, j) => (
+                    <li key={j} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                      <span style={{ color: gold, fontSize: "0.5rem", marginTop: 6, flexShrink: 0 }}>◆</span>
+                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.86rem",
+                        color: "#4a5568", lineHeight: 1.7 }}>{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </RevealBox>
           ))}
         </div>
 
-        <RevealBox style={{ textAlign: "center", marginTop: 16 }}>
-          <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
-            style={{ background: blue, color: "#fff", padding: "14px 36px",
+        {/* CTA bas */}
+        <RevealBox style={{ textAlign: "center", marginTop: 64 }}>
+          <div style={{ marginBottom: 8 }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2 L13.2 9.8 L21 12 L13.2 14.2 L12 22 L10.8 14.2 L3 12 L10.8 9.8 Z" stroke={gold} strokeWidth="1.2" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+            fontWeight: 500, color: "#1c2340", margin: "0 0 28px", lineHeight: 1.35 }}>
+            Tu peux commencer simplement…<br/>
+            et aller <em style={{ color: gold, fontStyle: "italic" }}>aussi loin que tu le souhaites.</em>
+          </p>
+          <a href={window.CALENDLY_URL || "#soins"} target="_blank" rel="noreferrer"
+            style={{ background: blue, color: "#fff", padding: "13px 32px",
               borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-              fontSize: "0.95rem", textDecoration: "none", display: "inline-block",
-              boxShadow: `0 6px 24px ${blue}40`, transition: "all 0.25s" }}
+              fontSize: "0.88rem", textDecoration: "none", display: "inline-block",
+              boxShadow: `0 6px 24px ${blue}35`, transition: "all 0.25s",
+              letterSpacing: "0.02em" }}
             onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-            Réserver ma séance
+            Découvrir les expériences
           </a>
         </RevealBox>
       </div>
