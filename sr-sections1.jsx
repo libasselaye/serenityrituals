@@ -151,7 +151,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Mental qui tourne\nen boucle",
+      label: "Un mental qui\nne s'arrête jamais",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Croissant de lune */}
@@ -167,7 +167,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Tensions sans savoir\nd'où elles viennent",
+      label: "Des tensions que\ntu ne t'expliques pas",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* 3 lignes ondulées bleues */}
@@ -180,7 +180,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Difficulté à avancer,\nmalgré l'envie",
+      label: "La sensation de ne pas\navancer, malgré l'envie",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Cercle soleil doré */}
@@ -200,7 +200,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Énergie en baisse,\nimpression d'être freiné(e)",
+      label: "Une énergie instable,\ncomme freinée",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Centre doré */}
@@ -218,7 +218,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Déconnexion de toi\net de tes besoins",
+      label: "Une déconnexion de toi,\nde ce que tu ressens vraiment",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Tige centrale */}
