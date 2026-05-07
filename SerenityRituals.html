@@ -21,6 +21,7 @@
     /* Responsive helpers */
     @media (max-width: 768px) {
       .hero-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .hero-grid { padding: 0 20px !important; }
       .desktop-nav, .desktop-cta { display: none !important; }
       .hamburger { display: flex !important; }
       .process-line { left: 28px !important; }
@@ -28,6 +29,9 @@
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
       .hero-content { padding: 0 24px !important; }
       .hero-content > div { max-width: 100% !important; }
+      .hero-badge { max-width: 100% !important; overflow: hidden !important; }
+      .hero-cta { flex-direction: column !important; }
+      .hero-cta a, .hero-cta button { width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
     }
     @media (max-width: 480px) {
       .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; }

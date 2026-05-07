@@ -67,7 +67,7 @@ function Hero({ colors }) {
 
         {/* Left */}
         <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10,
+          <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: 10,
             borderRadius: 50, padding: "7px 18px", marginBottom: 24,
             border: `1.5px solid ${gold}`, background: "rgba(255,255,255,0.6)",
             backdropFilter: "blur(6px)", alignSelf: "flex-start" }}>
@@ -100,7 +100,7 @@ function Hero({ colors }) {
             Je t'aide à libérer les tensions émotionnelles, relancer ton énergie vitale pour retrouver clarté, apaisement et élan.
           </p>
 
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+          <div className="hero-cta" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
             <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
               style={{ background: blue, color: "#fff", padding: "13px 30px",
                 borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,

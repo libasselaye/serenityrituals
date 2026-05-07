@@ -2,7 +2,7 @@
 // SerenityRituals — Contact & Footer
 
 const EMAIL = "hello@serenityrituals.fr";
-const INSTAGRAM_URL = "https://instagram.com/a-remplacer";
+const INSTAGRAM_URL = "https://instagram.com/serenity.rituals_";
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
 function Contact({ colors }) {
