@@ -14,7 +14,7 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1c2340; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     ::selection { background: #1a6fba22; color: #1a6fba; }
 
@@ -28,12 +28,14 @@
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
       /* Hero mobile : image pleine largeur en haut, texte en dessous */
       #accueil { flex-direction: column !important; padding-top: 80px !important; align-items: stretch !important; }
+      #accueil > * { min-width: 0 !important; max-width: 100% !important; flex-shrink: 1 !important; }
       .hero-img { position: relative !important; width: 100% !important; height: 280px !important; top: auto !important; right: auto !important; order: -1 !important; border-radius: 0 0 20px 20px !important; }
       .hero-gradient-left, .hero-gradient-bottom { display: none !important; }
-      .hero-grid { padding: 24px 24px 32px !important; gap: 0 !important; }
-      .hero-badge { max-width: 100% !important; overflow: hidden !important; }
+      .hero-grid { padding: 24px 24px 32px !important; gap: 0 !important; overflow: hidden !important; }
+      .hero-left { min-width: 0 !important; overflow: hidden !important; }
+      .hero-badge { display: none !important; }
       .hero-cta { flex-direction: column !important; }
-      .hero-cta a, .hero-cta button { width: 100% !important; text-align: center !important; }
+      .hero-cta a, .hero-cta button { display: block !important; width: 100% !important; box-sizing: border-box !important; text-align: center !important; }
     }
     @media (max-width: 480px) {
       .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; }

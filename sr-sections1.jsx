@@ -66,7 +66,7 @@ function Hero({ colors }) {
         position: "relative", zIndex: 2 }} className="hero-grid">
 
         {/* Left */}
-        <div>
+        <div className="hero-left">
           <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: 10,
             borderRadius: 50, padding: "7px 18px", marginBottom: 24,
             border: `1.5px solid ${gold}`, background: "rgba(255,255,255,0.6)",
