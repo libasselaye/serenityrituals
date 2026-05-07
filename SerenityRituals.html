@@ -27,14 +27,17 @@
       .tusens-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important; }
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
       /* Hero mobile : image fondue en arrière-plan, texte par-dessus */
-      #accueil { padding-top: 90px !important; min-height: 480px !important; }
-      .hero-img { width: 80% !important; right: -10px !important; }
-      .hero-gradient-left { background: linear-gradient(to right, rgba(250,252,255,1) 0%, rgba(250,252,255,0.98) 42%, rgba(250,252,255,0.72) 62%, rgba(250,252,255,0) 85%) !important; }
-      .hero-grid { padding: 0 20px 32px !important; gap: 0 !important; overflow: hidden !important; }
+      #accueil { padding-top: 90px !important; min-height: 380px !important; }
+      .hero-img { width: 78% !important; right: -10px !important; object-position: center 18% !important; }
+      .hero-gradient-left { background: linear-gradient(to right, rgba(250,252,255,1) 0%, rgba(250,252,255,0.97) 40%, rgba(250,252,255,0.68) 60%, rgba(250,252,255,0) 82%) !important; }
+      .hero-grid { padding: 0 20px 28px !important; gap: 0 !important; overflow: hidden !important; }
       .hero-left { min-width: 0 !important; overflow: hidden !important; }
-      .hero-badge { display: flex !important; max-width: 100% !important; overflow: hidden !important; }
-      .hero-cta { flex-direction: column !important; }
-      .hero-cta a, .hero-cta button { display: block !important; width: 100% !important; box-sizing: border-box !important; text-align: center !important; }
+      .hero-badge { display: flex !important; max-width: 100% !important; overflow: visible !important; border-radius: 12px !important; margin-bottom: 14px !important; }
+      .hero-badge span { white-space: normal !important; font-size: 0.58rem !important; line-height: 1.5 !important; }
+      .hero-left h1 { font-size: 1.8rem !important; margin-bottom: 12px !important; }
+      .hero-left p { font-size: 0.88rem !important; margin-bottom: 20px !important; }
+      .hero-cta { flex-direction: column !important; gap: 10px !important; }
+      .hero-cta a, .hero-cta button { display: block !important; width: 100% !important; box-sizing: border-box !important; text-align: center !important; padding: 12px 20px !important; }
     }
     @media (max-width: 480px) {
       .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; }
