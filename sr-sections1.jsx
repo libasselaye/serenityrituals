@@ -44,18 +44,18 @@ function Hero({ colors }) {
       background: "#fafcff",
     }}>
       {/* Image pleine hauteur — objectPosition contrôle le cadrage */}
-      <img src="img/acceuil_img.png" alt="" aria-hidden="true" style={{
+      <img src="img/acceuil_img.png" alt="" aria-hidden="true" className="hero-img" style={{
         position: "absolute", top: 0, right: 0, height: "100%", width: "65%",
         objectFit: "cover", objectPosition: "center 12%",
         zIndex: 0, pointerEvents: "none", userSelect: "none",
       }}/>
       {/* Gradient gauche */}
-      <div style={{
+      <div className="hero-gradient-left" style={{
         position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none",
         background: "linear-gradient(to right, rgba(250,252,255,1) 0%, rgba(250,252,255,0.92) 30%, rgba(250,252,255,0.55) 50%, rgba(250,252,255,0) 68%)",
       }}/>
       {/* Fondu bas vers TuSens */}
-      <div style={{
+      <div className="hero-gradient-bottom" style={{
         position: "absolute", bottom: 0, left: 0, right: 0, height: 80,
         zIndex: 1, pointerEvents: "none",
         background: "linear-gradient(to bottom, transparent, #faf9f6)",

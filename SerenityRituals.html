@@ -15,23 +15,25 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1c2340; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1c2340; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     ::selection { background: #1a6fba22; color: #1a6fba; }
 
     /* Responsive helpers */
     @media (max-width: 768px) {
       .hero-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-      .hero-grid { padding: 0 20px !important; }
       .desktop-nav, .desktop-cta { display: none !important; }
       .hamburger { display: flex !important; }
       .process-line { left: 28px !important; }
       .tusens-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important; }
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-      .hero-content { padding: 0 24px !important; }
-      .hero-content > div { max-width: 100% !important; }
+      /* Hero mobile : image pleine largeur en haut, texte en dessous */
+      #accueil { flex-direction: column !important; padding-top: 80px !important; align-items: stretch !important; }
+      .hero-img { position: relative !important; width: 100% !important; height: 280px !important; top: auto !important; right: auto !important; order: -1 !important; border-radius: 0 0 20px 20px !important; }
+      .hero-gradient-left, .hero-gradient-bottom { display: none !important; }
+      .hero-grid { padding: 24px 24px 32px !important; gap: 0 !important; }
       .hero-badge { max-width: 100% !important; overflow: hidden !important; }
       .hero-cta { flex-direction: column !important; }
-      .hero-cta a, .hero-cta button { width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
+      .hero-cta a, .hero-cta button { width: 100% !important; text-align: center !important; }
     }
     @media (max-width: 480px) {
       .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; }
