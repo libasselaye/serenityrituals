@@ -17,15 +17,41 @@ function RevealBox({ children, delay = 0, style = {} }) {
   const [ref, visible] = useReveal();
   return (
     <div ref={ref} style={{
-      transition: `opacity 0.75s ease ${delay}ms, transform 0.75s ease ${delay}ms`,
+      transition: `opacity 0.95s cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 0.95s cubic-bezier(0.22,1,0.36,1) ${delay}ms, filter 0.85s ease ${delay}ms`,
       opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(28px)",
+      transform: visible ? "translateY(0) scale(1)" : "translateY(36px) scale(0.97)",
+      filter: visible ? "blur(0px)" : "blur(3px)",
       ...style,
     }}>
       {children}
     </div>
   );
 }
+
+// Hairline rule helper — décoratif partagé entre sections (Apollo-style rhythm)
+function HairlineRule({ gold = "#e8b43a", marginBottom = 24 }) {
+  return (
+    <div aria-hidden="true" style={{
+      display: "inline-flex", alignItems: "center", gap: 12,
+      marginBottom,
+    }}>
+      <span style={{ width: 36, height: 1, background: gold, opacity: 0.5 }}/>
+      <span style={{ width: 5, height: 5, borderRadius: "50%", background: gold, opacity: 0.6 }}/>
+      <span style={{ width: 36, height: 1, background: gold, opacity: 0.5 }}/>
+    </div>
+  );
+}
+
+// Particules pré-calculées (positions/timings fixes)
+const HERO_PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+  key: i,
+  left: `${6 + (i * 5.17) % 88}%`,
+  top:  `${8 + (i * 8.43) % 84}%`,
+  size: 2 + (i % 3),
+  delay: `${(i * 0.43) % 5}s`,
+  dur:   `${5 + (i % 5)}s`,
+  isGold: i % 3 === 0,
+}));
 
 // ─── HERO ────────────────────────────────────────────────────────────────────
 function Hero({ colors }) {
@@ -34,15 +60,47 @@ function Hero({ colors }) {
 
   const scrollTo = (href) => {
     const el = document.querySelector(href);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: "smooth" });
   };
 
   return (
     <section id="accueil" style={{
       display: "flex", alignItems: "center",
-      padding: "110px 0 16px", position: "relative", overflow: "hidden",
-      background: "#fafcff",
+      padding: "140px 0 16px", position: "relative", overflow: "hidden",
+      background: `
+        radial-gradient(ellipse 80% 60% at 72% 42%, ${blue}0e 0%, transparent 58%),
+        radial-gradient(ellipse 50% 70% at 18% 85%, ${gold}0a 0%, transparent 48%),
+        radial-gradient(ellipse 35% 50% at 92% 12%, ${gold}07 0%, transparent 42%),
+        #fafcff
+      `,
     }}>
+      {/* Floating energy particles */}
+      {HERO_PARTICLES.map(p => (
+        <div key={p.key} aria-hidden="true" style={{
+          position: "absolute", left: p.left, top: p.top,
+          width: p.size, height: p.size, borderRadius: "50%",
+          background: p.isGold ? gold : blue,
+          animation: `float-particle ${p.dur} ease-in-out ${p.delay} infinite`,
+          zIndex: 1, pointerEvents: "none",
+          boxShadow: `0 0 ${p.size * 4}px ${p.isGold ? gold : blue}80`,
+        }}/>
+      ))}
+
+      {/* Pulsing energy rings — positioned in the image area */}
+      <div className="hero-rings" aria-hidden="true"
+        style={{ position: "absolute", left: "62%", top: "48%", zIndex: 1, pointerEvents: "none" }}>
+        {[0, 1, 2, 3].map(i => (
+          <div key={i} style={{
+            position: "absolute", top: "50%", left: "50%",
+            width:  `${200 + i * 75}px`,
+            height: `${200 + i * 75}px`,
+            borderRadius: "50%",
+            border: `1px solid ${gold}${["55","38","22","0e"][i]}`,
+            animation: `pulse-ring 5.5s ease-out ${i * 1.35}s infinite`,
+          }}/>
+        ))}
+      </div>
+
       {/* Image pleine hauteur — objectPosition contrôle le cadrage */}
       <img src="img/acceuil_img.png" alt="" aria-hidden="true" className="hero-img" style={{
         position: "absolute", top: 0, right: 0, height: "100%", width: "65%",
@@ -60,6 +118,7 @@ function Hero({ colors }) {
         zIndex: 1, pointerEvents: "none",
         background: "linear-gradient(to bottom, transparent, #faf9f6)",
       }}/>
+
       <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%",
         padding: "0 60px", display: "grid",
         gridTemplateColumns: "1fr 1fr", alignItems: "center",
@@ -67,58 +126,35 @@ function Hero({ colors }) {
 
         {/* Left */}
         <div className="hero-left">
-          <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: 10,
-            borderRadius: 50, padding: "7px 18px", marginBottom: 24,
-            border: `1.5px solid ${gold}`, background: "rgba(255,255,255,0.6)",
-            backdropFilter: "blur(6px)", alignSelf: "flex-start" }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3.5" fill={gold}/>
-              {[0,1,2,3,4,5,6,7].map(i => {
-                const a = (i/8)*Math.PI*2;
-                return <line key={i}
-                  x1={12+Math.cos(a)*5.5} y1={12+Math.sin(a)*5.5}
-                  x2={12+Math.cos(a)*9} y2={12+Math.sin(a)*9}
-                  stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>;
-              })}
-            </svg>
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.7rem",
-              color: "#7a5a00", fontWeight: 700, letterSpacing: "0.1em",
-              textTransform: "uppercase", whiteSpace: "nowrap" }}>
-              Activation de l'énergie vitale &nbsp;•&nbsp; La Trame &nbsp;•&nbsp; en Île-de-France &amp; À distance
-            </span>
-          </div>
-
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2.4rem, 4.2vw, 4.2rem)", fontWeight: 600,
-            color: "#1a1f3a", lineHeight: 1.08, margin: "0 0 20px", letterSpacing: "-0.02em" }}>
-            Remets ton énergie<br/>
-            en <em style={{ color: blue, fontStyle: "italic" }}>mouvement</em>
+            color: "#1a1f3a", lineHeight: 1.08, margin: "0 0 22px", letterSpacing: "-0.02em" }}>
+            Quand la tête comprend,<br/>
+            mais que <em style={{ color: blue, fontStyle: "italic" }}>le corps ne suit plus.</em>
           </h1>
 
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
-            color: "#4a5270", lineHeight: 1.7, maxWidth: 420, margin: "0 0 32px" }}>
-            Je t'aide à libérer les tensions émotionnelles, relancer ton énergie vitale pour retrouver clarté, apaisement et élan.
+            color: "#4a5270", lineHeight: 1.7, maxWidth: 480, margin: "0 0 32px" }}>
+            Relâcher la charge accumulée, retrouver une énergie disponible — et voir ce qui traînait depuis des mois redevenir possible.
           </p>
 
-          <div className="hero-cta" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+          <div className="hero-cta" style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
             <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
+              className="shimmer-btn"
               style={{ background: blue, color: "#fff", padding: "13px 30px",
                 borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
                 fontSize: "0.9rem", textDecoration: "none",
-                boxShadow: `0 8px 28px ${blue}45`, transition: "all 0.3s", display: "inline-block" }}
-              onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform=""; }}>
+                boxShadow: `0 8px 28px ${blue}50`, transition: "all 0.3s", display: "inline-block" }}
+              onMouseEnter={e => { e.currentTarget.style.transform="translateY(-3px)"; e.currentTarget.style.boxShadow=`0 14px 40px ${blue}60`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow=`0 8px 28px ${blue}50`; }}>
               Réserver ma séance
             </a>
-            <button onClick={() => scrollTo("#soins")}
-              style={{ background: "rgba(255,255,255,0.7)", color: "#1a1f3a", padding: "13px 30px",
-                borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                fontSize: "0.9rem", border: "1.5px solid rgba(26,31,58,0.25)", cursor: "pointer",
-                transition: "all 0.25s", backdropFilter: "blur(6px)" }}
-              onMouseEnter={e => { e.currentTarget.style.background="rgba(255,255,255,0.9)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background="rgba(255,255,255,0.7)"; }}>
-              Découvrir les expériences
-            </button>
+            <a href="#soins" onClick={e => { e.preventDefault(); scrollTo("#soins"); }}
+              style={{ color: blue, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+                fontSize: "0.9rem", textDecoration: "underline", textUnderlineOffset: 4,
+                display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 4px" }}>
+              Découvrir les expériences <span aria-hidden="true">→</span>
+            </a>
           </div>
 
         </div>
@@ -140,7 +176,7 @@ function TuSens({ colors }) {
 
   const items = [
     {
-      label: "Fatigue, même\nquand tu te reposes",
+      label: "Tu es fatiguée même après\nune vraie nuit de sommeil",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Spirale qui s'enroule vers l'intérieur */}
@@ -151,7 +187,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Un mental qui\nne s'arrête jamais",
+      label: "Ton mental tourne sur les mêmes\npensées depuis des mois",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Croissant de lune */}
@@ -167,20 +203,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Des tensions que\ntu ne t'expliques pas",
-      icon: (c) => (
-        <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
-          {/* 3 lignes ondulées bleues */}
-          <path d="M10 20 Q16 16 22 20 Q28 24 34 20 Q40 16 46 20" stroke={c.blue} strokeWidth={SW} strokeLinecap="round" fill="none"/>
-          <path d="M10 28 Q16 24 22 28 Q28 32 34 28 Q40 24 46 28" stroke={c.blue} strokeWidth={SW} strokeLinecap="round" fill="none"/>
-          <path d="M10 36 Q16 32 22 36 Q28 40 34 36 Q40 32 46 36" stroke={c.blue} strokeWidth={SW} strokeLinecap="round" fill="none"/>
-          {/* Trait doré fin en accent */}
-          <line x1="20" y1="44" x2="36" y2="44" stroke={c.gold} strokeWidth={SW} strokeLinecap="round"/>
-        </svg>
-      ),
-    },
-    {
-      label: "La sensation de ne pas\navancer, malgré l'envie",
+      label: "Tu sais ce que tu devrais faire —\ntu n'arrives pas à le faire",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Cercle soleil doré */}
@@ -200,25 +223,7 @@ function TuSens({ colors }) {
       ),
     },
     {
-      label: "Une énergie instable,\ncomme freinée",
-      icon: (c) => (
-        <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
-          {/* Centre doré */}
-          <circle cx="28" cy="28" r="5" stroke={c.gold} strokeWidth={SW} fill="none"/>
-          {/* Rayons bleus fins */}
-          <line x1="28" y1="10" x2="28" y2="18" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="28" y1="38" x2="28" y2="46" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="10" y1="28" x2="18" y2="28" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="38" y1="28" x2="46" y2="28" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="15.5" y1="15.5" x2="21" y2="21" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="35" y1="35" x2="40.5" y2="40.5" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="40.5" y1="15.5" x2="35" y2="21" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-          <line x1="21" y1="35" x2="15.5" y2="40.5" stroke={c.blue} strokeWidth={SW} strokeLinecap="round"/>
-        </svg>
-      ),
-    },
-    {
-      label: "Une déconnexion de toi,\nde ce que tu ressens vraiment",
+      label: "Tu fonctionnes,\nmais tu joues un rôle",
       icon: (c) => (
         <svg viewBox="0 0 56 56" width="48" height="48" fill="none">
           {/* Tige centrale */}
@@ -243,8 +248,9 @@ function TuSens({ colors }) {
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(1.9rem, 3vw, 2.6rem)", fontWeight: 500,
             color: blue, margin: "0 0 20px", letterSpacing: "-0.015em",
-            fontStyle: "italic" }}>
-            Tu sens que quelque chose bloque…
+            fontStyle: "italic", lineHeight: 1.25 }}>
+            Tu sens que quelque chose bloque.<br/>
+            Et tu en as fait le tour mille fois dans ta tête.
           </h2>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
             <div style={{ height: 1, width: 36, background: `${gold}80` }}/>
@@ -253,7 +259,7 @@ function TuSens({ colors }) {
           </div>
         </RevealBox>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 20 }}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 28 }}
           className="tusens-grid">
           {items.map((item, i) => (
             <RevealBox key={i} delay={i * 70}>
@@ -506,35 +512,25 @@ function Services({ colors }) {
 
   const soins = [
     {
+      id: "activation",
       icon: "✦",
       name: "Activation de l'énergie vitale",
       desc: "Un soin destiné à relancer la circulation de l'énergie, réveiller la vitalité intérieure et accompagner une sensation de recentrage et de dynamisme.",
       benefits: ["Retrouver de l'élan", "Se reconnecter à son énergie", "Apaiser les sensations de fatigue intérieure", "Favoriser un meilleur ancrage"],
     },
     {
+      id: "la-trame",
       icon: "◈",
       name: "Soin vibratoire La Trame",
       desc: "Un soin vibratoire doux qui vise à harmoniser la circulation de l'information dans le corps et à accompagner la libération des tensions émotionnelles.",
       benefits: ["Apaiser les tensions", "Favoriser la libération émotionnelle", "Retrouver une sensation d'alignement", "Accompagner les périodes de changement"],
-    },
-    {
-      icon: "◎",
-      name: "Photostimulation Dream Machine",
-      desc: "Une expérience immersive de photostimulation qui invite à la relaxation profonde, à l'exploration intérieure et à l'apaisement mental.",
-      benefits: ["Favoriser la détente mentale", "Accompagner le lâcher-prise", "Stimuler l'imaginaire intérieur", "Créer un moment de pause profonde"],
-    },
-    {
-      icon: "◇",
-      name: "Packs one-to-one en ligne",
-      desc: "Un accompagnement personnalisé à distance, pensé pour celles et ceux qui souhaitent avancer sur plusieurs séances avec un suivi plus régulier.",
-      benefits: ["Accompagnement personnalisé", "Suivi dans le temps", "Flexibilité à distance", "Travail progressif sur les blocages"],
     },
   ];
 
   return (
     <section id="soins" style={{ padding: "100px 24px", background: "#f6f9ff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <RevealBox style={{ textAlign: "center", marginBottom: 64 }}>
+        <RevealBox style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ display: "inline-block", width: 44, height: 3,
             background: `linear-gradient(90deg, ${blue}, ${gold})`,
             borderRadius: 2, marginBottom: 20 }}/>
@@ -549,10 +545,36 @@ function Services({ colors }) {
           </p>
         </RevealBox>
 
+        {/* Sub-nav interne section Soins (Apollo Workspaces style) */}
+        <RevealBox delay={120}>
+          <div style={{
+            display: "flex", justifyContent: "center", alignItems: "center",
+            gap: 18, marginBottom: 56, flexWrap: "wrap",
+          }}>
+            <a href="#activation" className="soins-subnav-link"
+              onClick={e => {
+                e.preventDefault();
+                const el = document.querySelector('#activation');
+                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 132, behavior: "smooth" });
+              }}>
+              Activation de l'énergie vitale
+            </a>
+            <span aria-hidden="true" style={{ color: gold, fontSize: 16, opacity: 0.7, lineHeight: 1 }}>·</span>
+            <a href="#la-trame" className="soins-subnav-link"
+              onClick={e => {
+                e.preventDefault();
+                const el = document.querySelector('#la-trame');
+                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 132, behavior: "smooth" });
+              }}>
+              Soin vibratoire La Trame
+            </a>
+          </div>
+        </RevealBox>
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28 }}>
           {soins.map((s, i) => (
             <RevealBox key={s.name} delay={i * 80}>
-              <div className="service-card" style={{
+              <div id={s.id} className="service-card" style={{
                 background: "white", borderRadius: 24, padding: "36px 28px",
                 boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
                 border: "1px solid rgba(26,111,186,0.08)",
@@ -684,4 +706,135 @@ function ForWho({ colors }) {
   );
 }
 
-Object.assign(window, { Hero, About, Services, ForWho, RevealBox, useReveal, TuSens, Problem });
+// ─── PROGRAMME SIGNATURE — Banner CTA (luxe wellness, charte respectée) ───────
+function ProgrammeBlock({ colors }) {
+  const blue = colors?.blue || "#0038C7";
+  const gold = colors?.gold || "#FFB800";
+
+  return (
+    <section id="signature" style={{
+      position: "relative",
+      padding: "130px 24px 140px",
+      overflow: "hidden",
+      background: "#faf9f6",
+    }}>
+
+      {/* Géométrie sacrée — anneaux concentriques top-left */}
+      <div aria-hidden="true" style={{
+        position: "absolute", top: 110, left: 60,
+        width: 280, height: 280, zIndex: 1, pointerEvents: "none",
+      }}>
+        {[0, 1, 2, 3, 4].map(i => (
+          <div key={i} style={{
+            position: "absolute", top: `${i * 22}px`, left: `${i * 22}px`,
+            right: `${i * 22}px`, bottom: `${i * 22}px`,
+            border: `1px solid ${gold}${["38", "28", "1c", "12", "08"][i]}`,
+            borderRadius: "50%",
+          }}/>
+        ))}
+        <div style={{
+          position: "absolute", top: "50%", left: "50%",
+          width: 6, height: 6, borderRadius: "50%",
+          transform: "translate(-50%, -50%)",
+          background: gold, opacity: 0.6,
+        }}/>
+      </div>
+
+      {/* Géométrie sacrée — étoile 8 branches bottom-right */}
+      <div aria-hidden="true" style={{
+        position: "absolute", bottom: 100, right: 80,
+        zIndex: 1, pointerEvents: "none",
+      }}>
+        <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+          {[0, 1, 2, 3, 4, 5, 6, 7].map(i => {
+            const a = (i / 8) * Math.PI * 2;
+            return (
+              <line key={i}
+                x1={100 + Math.cos(a) * 14} y1={100 + Math.sin(a) * 14}
+                x2={100 + Math.cos(a) * 88} y2={100 + Math.sin(a) * 88}
+                stroke={gold} strokeWidth="1" strokeOpacity="0.32" strokeLinecap="round"/>
+            );
+          })}
+          <circle cx="100" cy="100" r="90" stroke={gold} strokeWidth="1" strokeOpacity="0.15" fill="none"/>
+          <circle cx="100" cy="100" r="60" stroke={blue} strokeWidth="1" strokeOpacity="0.18" fill="none" strokeDasharray="2 4"/>
+          <circle cx="100" cy="100" r="6" fill={gold} fillOpacity="0.55"/>
+        </svg>
+      </div>
+
+      {/* Content */}
+      <div style={{
+        position: "relative", zIndex: 2,
+        maxWidth: 860, margin: "0 auto", textAlign: "center",
+      }}>
+        <RevealBox>
+          {/* Emblème sceau doré — signature mark */}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 22 }}>
+            <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+              <circle cx="21" cy="21" r="19.5" stroke={gold} strokeWidth="1" strokeOpacity="0.32" fill="none"/>
+              <circle cx="21" cy="21" r="14" stroke={gold} strokeWidth="1" strokeOpacity="0.5" fill="none" strokeDasharray="1.6 2.6"/>
+              <path d="M21 7.5 L22.65 17 L32.2 18.6 L22.65 20.2 L21 29.7 L19.35 20.2 L9.8 18.6 L19.35 17 Z"
+                fill={gold}/>
+            </svg>
+          </div>
+
+          {/* Eyebrow */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 14,
+            marginBottom: 34,
+          }}>
+            <span style={{ width: 40, height: 1, background: gold, opacity: 0.5 }}/>
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: "0.72rem", fontWeight: 700,
+              letterSpacing: "0.28em", textTransform: "uppercase", color: gold,
+            }}>
+              Programme signature
+            </span>
+            <span style={{ width: 40, height: 1, background: gold, opacity: 0.5 }}/>
+          </div>
+
+          {/* H2 — éditorial dramatique */}
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(2.6rem, 4.8vw, 4.2rem)", fontWeight: 500,
+            color: "#1c2340", margin: "0 0 28px", lineHeight: 1.06,
+            letterSpacing: "-0.02em",
+          }}>
+            Quand tu es prête à aller plus loin —<br/>
+            <em style={{ color: blue, fontStyle: "italic", fontWeight: 600 }}>
+              l'accompagnement complet.
+            </em>
+          </h2>
+
+          {/* Sub */}
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: "1.05rem",
+            color: "#4a5270", lineHeight: 1.8,
+            maxWidth: 560, margin: "0 auto 56px",
+          }}>
+            Trois semaines, trois approches combinées pour accélérer le processus
+            et ancrer durablement ce qui se transforme en toi.
+          </p>
+
+          {/* CTA primaire bleu shimmer, large */}
+          <a href="programmesignature.html"
+            className="shimmer-btn"
+            style={{
+              background: blue, color: "#fff",
+              padding: "18px 52px", borderRadius: 50,
+              fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+              fontSize: "0.98rem", textDecoration: "none",
+              display: "inline-flex", alignItems: "center", gap: 10,
+              boxShadow: `0 16px 44px ${blue}52`, transition: "all 0.3s",
+              letterSpacing: "0.03em",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 24px 58px ${blue}65`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = `0 16px 44px ${blue}52`; }}>
+            Découvrir le programme <span aria-hidden="true">→</span>
+          </a>
+        </RevealBox>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Hero, About, Services, ForWho, RevealBox, useReveal, TuSens, Problem, ProgrammeBlock, HairlineRule });

@@ -63,7 +63,7 @@ function Process({ colors }) {
   ];
 
   return (
-    <section id="deroulement" style={{ padding: "96px 24px 80px", background: "#fff", position: "relative", overflow: "hidden" }}>
+    <section id="programme" style={{ padding: "96px 24px 80px", background: "#fff", position: "relative", overflow: "hidden" }}>
       {/* Décor feuille droite */}
       <div style={{ position: "absolute", right: -40, top: "50%", transform: "translateY(-50%)", opacity: 0.07, pointerEvents: "none" }}>
         <svg width="280" height="380" viewBox="0 0 280 380" fill="none">
@@ -155,7 +155,7 @@ function Process({ colors }) {
             Tu peux commencer simplement…<br/>
             et aller <em style={{ color: blue, fontStyle: "italic" }}>aussi loin que tu le souhaites.</em>
           </p>
-          <a href="#soins" onClick={e => { e.preventDefault(); const el = document.querySelector('#soins'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } }}
+          <a href="#soins" onClick={e => { e.preventDefault(); const el = document.querySelector('#soins'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: 'smooth' }); } }}
             style={{ background: blue, color: "#fff", padding: "13px 32px",
               borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
               fontSize: "0.88rem", textDecoration: "none", display: "inline-block",
@@ -171,43 +171,151 @@ function Process({ colors }) {
   );
 }
 
+// ─── ENTREPRISES ──────────────────────────────────────────────────────────────
+function Entreprises({ colors }) {
+  const blue = colors?.blue || "#1a6fba";
+  const gold = colors?.gold || "#e8b43a";
+
+  return (
+    <section id="entreprises" style={{ padding: "100px 24px", background: "#faf9f6", position: "relative", overflow: "hidden" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <RevealBox style={{ textAlign: "center", marginBottom: 56 }}>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Pour les entreprises
+          </div>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
+            color: "#1c2340", margin: "0 0 16px", lineHeight: 1.25 }}>
+            Offrir à vos équipes un{" "}
+            <em style={{ color: blue, fontStyle: "italic" }}>vrai temps de pause.</em>
+          </h2>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+            color: "#6b7280", maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
+            Une expérience immersive pour soutenir la détente, le recentrage et la régulation
+            émotionnelle des collaborateurs — en séminaire, en team building ou en intervention ponctuelle.
+          </p>
+        </RevealBox>
+
+        <RevealBox delay={120}>
+          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 480px)",
+            justifyContent: "center", gap: 28 }}>
+            <div className="service-card" style={{
+              background: "white", borderRadius: 24, padding: "36px 32px",
+              boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
+              border: "1px solid rgba(26,111,186,0.08)",
+              transition: "all 0.3s ease",
+              display: "flex", flexDirection: "column",
+            }}>
+              <div style={{ fontSize: "1.8rem", color: blue, marginBottom: 16,
+                width: 52, height: 52, background: `${blue}10`,
+                borderRadius: 14, display: "flex", alignItems: "center",
+                justifyContent: "center" }}>
+                ◎
+              </div>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.45rem",
+                fontWeight: 600, color: "#1c2340", margin: "0 0 14px", lineHeight: 1.3 }}>
+                Photostimulation Dream Machine
+              </h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.94rem",
+                color: "#6b7280", lineHeight: 1.7, marginBottom: 22 }}>
+                Une expérience immersive de photostimulation qui invite à la relaxation profonde,
+                à l'exploration intérieure et à l'apaisement mental. Format adaptable :
+                individuel, petit groupe ou événement d'entreprise.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px" }}>
+                {["Favoriser la détente mentale",
+                  "Accompagner le lâcher-prise",
+                  "Stimuler l'imaginaire intérieur",
+                  "Créer un moment de pause profonde"].map(b => (
+                  <li key={b} style={{ display: "flex", alignItems: "center", gap: 8,
+                    fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                    color: "#4a5568", marginBottom: 7 }}>
+                    <span style={{ color: gold, fontSize: "1rem" }}>›</span>{b}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact"
+                onClick={e => { e.preventDefault(); const el = document.querySelector('#contact'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: 'smooth' }); } }}
+                style={{ display: "block", textAlign: "center", padding: "12px 0",
+                  borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+                  fontSize: "0.9rem", textDecoration: "none", transition: "all 0.25s",
+                  background: blue, color: "#fff",
+                  boxShadow: `0 6px 22px ${blue}35` }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                Demander un devis
+              </a>
+            </div>
+          </div>
+        </RevealBox>
+      </div>
+    </section>
+  );
+}
+
 // ─── BIENFAITS ────────────────────────────────────────────────────────────────
 function Benefits({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
   const items = [
-    { icon: "◌", label: "Apaisement des tensions" },
-    { icon: "◌", label: "Meilleure clarté mentale" },
-    { icon: "◌", label: "Sensation de légèreté" },
-    { icon: "◌", label: "Libération émotionnelle" },
-    { icon: "◌", label: "Relaxation profonde" },
-    { icon: "◌", label: "Recentrage" },
-    { icon: "◌", label: "Reconnexion à soi" },
-    { icon: "◌", label: "Regain d'énergie" },
+    { label: "Apaisement des tensions" },
+    { label: "Meilleure clarté mentale" },
+    { label: "Sensation de légèreté" },
+    { label: "Libération émotionnelle" },
+    { label: "Relaxation profonde" },
+    { label: "Recentrage" },
+    { label: "Reconnexion à soi" },
+    { label: "Regain d'énergie" },
   ];
 
   return (
-    <section style={{ padding: "100px 24px", background: "#fff" }}>
+    <section style={{ padding: "130px 24px 130px", background: "#07111f", position: "relative", overflow: "hidden" }}>
+      {/* Top fade — smooth depuis Entreprises #faf9f6 */}
+      <div aria-hidden="true" style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 110,
+        background: "linear-gradient(to bottom, #faf9f6 0%, rgba(250,249,246,0.35) 35%, transparent 100%)",
+        pointerEvents: "none", zIndex: 2,
+      }}/>
+      {/* Bottom fade — smooth vers Testimonials #f6f9ff */}
+      <div aria-hidden="true" style={{
+        position: "absolute", bottom: 0, left: 0, right: 0, height: 110,
+        background: "linear-gradient(to top, #f6f9ff 0%, rgba(246,249,255,0.35) 35%, transparent 100%)",
+        pointerEvents: "none", zIndex: 2,
+      }}/>
+      {/* Ambient glows */}
+      <div aria-hidden="true" style={{ position: "absolute", top: "25%", left: "8%",
+        width: 520, height: 520, borderRadius: "50%",
+        background: `radial-gradient(circle, ${blue}16 0%, transparent 68%)`,
+        pointerEvents: "none" }}/>
+      <div aria-hidden="true" style={{ position: "absolute", bottom: "15%", right: "10%",
+        width: 320, height: 320, borderRadius: "50%",
+        background: `radial-gradient(circle, ${gold}12 0%, transparent 68%)`,
+        pointerEvents: "none" }}/>
+
       <div style={{ maxWidth: 1100, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
-        gap: 72, alignItems: "center" }} className="two-col-grid">
+        gap: 72, alignItems: "center", position: "relative", zIndex: 1 }}
+        className="two-col-grid">
+
         <RevealBox>
           <div style={{ display: "inline-block", width: 44, height: 3,
             background: `linear-gradient(90deg, ${blue}, ${gold})`,
             borderRadius: 2, marginBottom: 20 }}/>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#1c2340", margin: "0 0 24px", lineHeight: 1.25 }}>
-            Des bienfaits ressentis<br/>en douceur
+            color: "#fff", margin: "0 0 24px", lineHeight: 1.25 }}>
+            Des bienfaits ressentis<br/>
+            <em style={{ color: gold, fontStyle: "italic" }}>en douceur</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
-            color: "#4a5568", lineHeight: 1.8, marginBottom: 36 }}>
+            color: "rgba(255,255,255,0.48)", lineHeight: 1.8, marginBottom: 36 }}>
             Chaque personne vit les séances différemment. Les soins proposés peuvent accompagner
             un mieux-être global, une sensation d'apaisement, de relâchement ou de clarté intérieure.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
-            color: "#9ca3af", lineHeight: 1.65,
+            color: "rgba(255,255,255,0.28)", lineHeight: 1.65,
             borderLeft: `3px solid ${gold}50`, paddingLeft: 16, fontStyle: "italic" }}>
             Les soins énergétiques ne remplacent pas un avis médical, un diagnostic
             ou un traitement médical.
@@ -217,17 +325,31 @@ function Benefits({ colors }) {
         <RevealBox delay={150}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             {items.map((item, i) => (
-              <div key={item.label} style={{
-                background: i % 3 === 0 ? `${blue}08` : i % 3 === 1 ? `${gold}10` : "#f8faff",
-                borderRadius: 16, padding: "20px 18px",
-                border: `1px solid ${i % 2 === 0 ? `${blue}12` : `${gold}18`}`,
-                display: "flex", alignItems: "center", gap: 12,
-                transition: "transform 0.25s",
-              }}>
-                <div style={{ width: 8, height: 8, borderRadius: "50%",
-                  background: i % 2 === 0 ? blue : gold, flexShrink: 0 }}/>
+              <div key={item.label}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = "scale(1.04)";
+                  e.currentTarget.style.borderColor = `${i % 2 === 0 ? blue : gold}70`;
+                  e.currentTarget.style.boxShadow = `0 0 28px ${i % 2 === 0 ? blue : gold}28`;
+                  e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = "";
+                  e.currentTarget.style.borderColor = `${i % 2 === 0 ? `${blue}28` : `${gold}20`}`;
+                  e.currentTarget.style.boxShadow = "";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                }}
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  borderRadius: 16, padding: "20px 18px",
+                  border: `1px solid ${i % 2 === 0 ? `${blue}28` : `${gold}20`}`,
+                  display: "flex", alignItems: "center", gap: 12,
+                  transition: "all 0.3s ease", cursor: "default",
+                }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", flexShrink: 0,
+                  background: i % 2 === 0 ? blue : gold,
+                  boxShadow: `0 0 10px ${i % 2 === 0 ? blue : gold}` }}/>
                 <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem",
-                  color: "#1c2340", fontWeight: 500, lineHeight: 1.3 }}>
+                  color: "rgba(255,255,255,0.78)", fontWeight: 500, lineHeight: 1.3 }}>
                   {item.label}
                 </span>
               </div>
@@ -399,4 +521,4 @@ function FAQ({ colors }) {
   );
 }
 
-Object.assign(window, { Process, Benefits, Testimonials, FAQ });
+Object.assign(window, { Process, Entreprises, Benefits, Testimonials, FAQ });

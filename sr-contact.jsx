@@ -188,24 +188,31 @@ function Footer({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
-  const scrollTo = (href) => {
+  const scrollTo = (e, href) => {
+    if (!href.startsWith("#")) return; // page link, browser nav
+    if (e) e.preventDefault();
     const el = document.querySelector(href);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: "smooth" });
   };
 
   const links = [
-    { label: "Accueil", href: "#accueil" },
-    { label: "À propos", href: "#apropos" },
-    { label: "Soins", href: "#soins" },
-    { label: "Déroulement", href: "#deroulement" },
-    { label: "Témoignages", href: "#temoignages" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
+    { label: "Accueil",             href: "#accueil" },
+    { label: "À propos",            href: "#apropos" },
+    { label: "Expériences",         href: "#soins" },
+    { label: "Programme signature", href: "programmesignature.html" },
+    { label: "Entreprises",         href: "#entreprises" },
+    { label: "Contact",             href: "#contact" },
   ];
 
   return (
-    <footer style={{ background: "#0f1829", color: "white", padding: "64px 24px 32px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <footer style={{ background: "#0f1829", color: "white", padding: "90px 24px 32px", position: "relative", overflow: "hidden" }}>
+      {/* Top fade — smooth depuis Contact #f6f9ff */}
+      <div aria-hidden="true" style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 100,
+        background: "linear-gradient(to bottom, #f6f9ff 0%, rgba(246,249,255,0.3) 35%, transparent 100%)",
+        pointerEvents: "none", zIndex: 1,
+      }}/>
+      <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
         <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr",
           gap: 48, marginBottom: 48 }} className="footer-grid">
           {/* Brand */}
@@ -229,7 +236,8 @@ function Footer({ colors }) {
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
               color: "rgba(255,255,255,0.5)", lineHeight: 1.75, maxWidth: 280, marginBottom: 24 }}>
-              Île-de-France &amp; À distance
+              Séances en Île-de-France<br/>
+              À distance dans toute la francophonie
             </p>
             <div style={{ display: "flex", gap: 12 }}>
               <a href={`mailto:${EMAIL}`}
@@ -260,17 +268,22 @@ function Footer({ colors }) {
             <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem",
               fontWeight: 600, color: gold, letterSpacing: "0.1em",
               textTransform: "uppercase", marginBottom: 20 }}>Navigation</h4>
-            {links.map(l => (
-              <a key={l.href} href={l.href}
-                onClick={e => { e.preventDefault(); scrollTo(l.href); }}
-                style={{ display: "block", fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "0.9rem", color: "rgba(255,255,255,0.55)",
-                  textDecoration: "none", marginBottom: 10, transition: "color 0.2s" }}
-                onMouseEnter={e => e.currentTarget.style.color = "#fff"}
-                onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.55)"}>
-                {l.label}
-              </a>
-            ))}
+            {links.map(l => {
+              const restColor = l.indent ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.55)";
+              return (
+                <a key={l.href} href={l.href}
+                  onClick={e => scrollTo(e, l.href)}
+                  style={{ display: "block", fontFamily: "'DM Sans', sans-serif",
+                    fontSize: l.indent ? "0.82rem" : "0.9rem",
+                    color: restColor,
+                    textDecoration: "none", marginBottom: 9, transition: "color 0.2s",
+                    paddingLeft: l.indent ? 14 : 0 }}
+                  onMouseEnter={e => e.currentTarget.style.color = "#fff"}
+                  onMouseLeave={e => e.currentTarget.style.color = restColor}>
+                  {l.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* CTA */}
@@ -312,4 +325,70 @@ function Footer({ colors }) {
   );
 }
 
-Object.assign(window, { Contact, Footer, EMAIL, INSTAGRAM_URL });
+// ─── SCROLL DOTS — Indicateur position vertical (Apollo / magazine longform) ──
+function ScrollDots() {
+  const items = React.useMemo(() => ([
+    { id: "accueil",      label: "Accueil" },
+    { id: "apropos",      label: "À propos" },
+    { id: "soins",        label: "Soins" },
+    { id: "signature",    label: "Signature" },
+    { id: "entreprises",  label: "Entreprises" },
+    { id: "temoignages",  label: "Témoignages" },
+    { id: "faq",          label: "FAQ" },
+    { id: "contact",      label: "Contact" },
+  ]), []);
+  const [active, setActive] = React.useState(0);
+
+  React.useEffect(() => {
+    const observers = items.map((it, idx) => {
+      const el = document.getElementById(it.id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(idx); },
+        { threshold: 0, rootMargin: "-35% 0px -50% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach(o => o && o.disconnect());
+  }, [items]);
+
+  const scrollTo = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 112;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const gold = "#FFB800";
+  return (
+    <nav className="scroll-dots" aria-label="Navigation rapide">
+      {items.map((it, idx) => {
+        const isActive = idx === active;
+        return (
+          <a key={it.id} href={"#" + it.id}
+            className="scroll-dots__item"
+            onClick={e => scrollTo(e, it.id)}
+            aria-label={"Aller à " + it.label}
+            aria-current={isActive ? "true" : undefined}>
+            <span style={{
+              display: "block",
+              width: isActive ? 11 : 8,
+              height: isActive ? 11 : 8,
+              borderRadius: "50%",
+              background: isActive ? gold : "transparent",
+              border: isActive ? `1px solid ${gold}` : "1px solid rgba(232,180,58,0.45)",
+              boxShadow: isActive ? `0 0 14px rgba(255,184,0,0.55)` : "none",
+              transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
+            }}/>
+            <span className="scroll-dots__label">{it.label}</span>
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
+
+Object.assign(window, { Contact, Footer, ScrollDots, EMAIL, INSTAGRAM_URL });
