@@ -19,15 +19,18 @@
     ::selection { background: #1a6fba22; color: #1a6fba; }
 
     /* Responsive helpers */
-    @media (max-width: 768px) {
-      .hero-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    /* Hamburger pour <1024px (8 nav items + CTA = trop serré sous 1024) */
+    @media (max-width: 1024px) {
       .desktop-nav, .desktop-cta { display: none !important; }
       .hamburger { display: flex !important; }
+    }
+    @media (max-width: 768px) {
+      .hero-grid, .two-col-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
       .process-line { left: 28px !important; }
-      .tusens-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important; }
+      .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
       /* Hero mobile : image fondue en arrière-plan, texte par-dessus */
-      #accueil { padding-top: 90px !important; min-height: 380px !important; }
+      #accueil { padding-top: 120px !important; min-height: 380px !important; }
       .hero-img { width: 78% !important; right: -10px !important; object-position: center 18% !important; }
       .hero-gradient-left { background: linear-gradient(to right, rgba(250,252,255,1) 0%, rgba(250,252,255,0.97) 40%, rgba(250,252,255,0.68) 60%, rgba(250,252,255,0) 82%) !important; }
       .hero-grid { padding: 0 20px 28px !important; gap: 0 !important; overflow: hidden !important; }
@@ -47,8 +50,8 @@
     }
 
     .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(26,63,186,0.12) !important;
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 24px 64px rgba(26,63,186,0.18) !important;
     }
     .nav-link::after {
       content: '';
@@ -68,6 +71,106 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #1a6fba40; border-radius: 3px; }
+
+    /* ── Wow effects ────────────────────────────────── */
+    @keyframes float-particle {
+      0%   { transform: translateY(0)    scale(1);   opacity: 0; }
+      15%  {                                          opacity: 1; }
+      85%  {                                          opacity: 0.55; }
+      100% { transform: translateY(-72px) scale(0.6); opacity: 0; }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: translate(-50%,-50%) scale(0.7); opacity: 0.6; }
+      100% { transform: translate(-50%,-50%) scale(2.8); opacity: 0; }
+    }
+    @keyframes btn-shine {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    .shimmer-btn {
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    .shimmer-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.22) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: btn-shine 3s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 1;
+    }
+    #cursor-glow {
+      position: fixed;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 8999;
+      background: radial-gradient(circle, rgba(255,184,0,0.05) 0%, rgba(0,56,199,0.03) 38%, transparent 65%);
+      transform: translate(-50%,-50%);
+      left: -1000px; top: -1000px;
+      will-change: left, top;
+    }
+    @media (max-width: 768px) {
+      .hero-rings    { display: none !important; }
+    }
+
+    /* ── Scroll dots indicator (Apollo-style) ── */
+    .scroll-dots {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 900;
+      display: flex; flex-direction: column;
+      gap: 18px; align-items: center;
+    }
+    .scroll-dots__item {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px;
+      text-decoration: none;
+    }
+    .scroll-dots__label {
+      position: absolute;
+      right: 28px;
+      top: 50%; transform: translate(0, -50%);
+      white-space: nowrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-style: italic; color: #0038C7;
+      background: #faf9f6;
+      border: 1px solid rgba(232,180,58,0.55);
+      border-radius: 2px;
+      padding: 4px 10px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .scroll-dots__item:hover .scroll-dots__label {
+      opacity: 1; transform: translate(-4px, -50%);
+    }
+    @media (max-width: 1024px) {
+      .scroll-dots { display: none !important; }
+    }
+
+    /* ── Sub-nav Soins ── */
+    .soins-subnav-link {
+      position: relative;
+      font-family: 'DM Sans', sans-serif; font-weight: 600;
+      font-size: 0.84rem; color: #0038C7;
+      text-decoration: none;
+      padding: 8px 4px;
+      transition: color 0.2s ease;
+    }
+    .soins-subnav-link::after {
+      content: '';
+      position: absolute;
+      left: 4px; right: 4px; bottom: 2px;
+      height: 1px; background: #FFB800;
+      transform: scaleX(0); transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+    .soins-subnav-link:hover::after { transform: scaleX(1); }
   </style>
   <template id="__bundler_thumbnail" data-bg-color="#fafcff">
     <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
@@ -89,11 +192,11 @@
 <body>
   <div id="root"></div>
 
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel" src="sr-header.jsx"></script>
-  <script type="text/babel" src="sr-sections1.jsx"></script>
-  <script type="text/babel" src="sr-sections2.jsx"></script>
-  <script type="text/babel" src="sr-contact.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx?v=8"></script>
+  <script type="text/babel" src="sr-header.jsx?v=8"></script>
+  <script type="text/babel" src="sr-sections1.jsx?v=8"></script>
+  <script type="text/babel" src="sr-sections2.jsx?v=8"></script>
+  <script type="text/babel" src="sr-contact.jsx?v=8"></script>
 
   <script type="text/babel">
     const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -117,13 +220,16 @@
             <Process colors={colors}/>
             <About colors={colors}/>
             <Services colors={colors}/>
+            <ProgrammeBlock colors={colors}/>
             <ForWho colors={colors}/>
+            <Entreprises colors={colors}/>
             <Benefits colors={colors}/>
             <Testimonials colors={colors}/>
             <FAQ colors={colors}/>
             <Contact colors={colors}/>
           </main>
           <Footer colors={colors}/>
+          <ScrollDots/>
           <TweaksPanel>
             <TweakSection label="Couleurs">
               <TweakColor id="blue" label="Bleu Santorin"/>
@@ -139,6 +245,17 @@
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(<App/>);
+  </script>
+  <script>
+    (function() {
+      var el = document.createElement('div');
+      el.id = 'cursor-glow';
+      document.body.appendChild(el);
+      document.addEventListener('mousemove', function(e) {
+        el.style.left = e.clientX + 'px';
+        el.style.top  = e.clientY + 'px';
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>

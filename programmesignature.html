@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programme signature — SerenityRituals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 20%, rgba(0,56,199,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 80%, rgba(255,184,0,0.10) 0%, transparent 55%),
+        #fafcff;
+      color: #1c2340;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      overflow-x: hidden;
+    }
+    main {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      max-width: 720px; margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: #e8b43a; margin-bottom: 22px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 600; line-height: 1.1;
+      color: #1c2340; margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    h1 em {
+      color: #0038C7; font-style: italic;
+    }
+    p {
+      font-size: 1.05rem; line-height: 1.75;
+      color: #4a5270; margin-bottom: 40px;
+      max-width: 540;
+    }
+    a.back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #0038C7; color: #fff;
+      padding: 14px 32px; border-radius: 50px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; letterSpacing: 0.02em;
+      box-shadow: 0 8px 28px rgba(0,56,199,0.30);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    a.back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0,56,199,0.40);
+    }
+    .ornament {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 28px; opacity: 0.7;
+    }
+    .ornament span { display: block; height: 1px; width: 60px; background: rgba(232,180,58,0.6); }
+    .ornament svg { display: block; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="ornament" aria-hidden="true">
+      <span></span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 L13.2 9.8 L21 12 L13.2 14.2 L12 22 L10.8 14.2 L3 12 L10.8 9.8 Z"
+          fill="#e8b43a"/>
+      </svg>
+      <span></span>
+    </div>
+    <div class="eyebrow">Programme signature</div>
+    <h1>
+      Bientôt<br/>
+      <em>disponible.</em>
+    </h1>
+    <p>
+      Le contenu détaillé du programme signature est en cours de préparation.
+      En attendant, contacte-moi pour en parler directement.
+    </p>
+    <a class="back" href="SerenityRituals.html">← Retour à l'accueil</a>
+  </main>
+</body>
+</html>
