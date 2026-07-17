@@ -65,7 +65,7 @@ function Hero({ colors }) {
 
   return (
     <section id="accueil" style={{
-      display: "flex", alignItems: "center",
+      display: "flex", alignItems: "center", minHeight: 640,
       padding: "140px 0 16px", position: "relative", overflow: "hidden",
       background: `
         radial-gradient(ellipse 80% 60% at 72% 42%, ${blue}0e 0%, transparent 58%),
@@ -127,10 +127,10 @@ function Hero({ colors }) {
         {/* Left */}
         <div className="hero-left">
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(2.4rem, 4.2vw, 4.2rem)", fontWeight: 600,
-            color: "#1a1f3a", lineHeight: 1.08, margin: "0 0 22px", letterSpacing: "-0.02em" }}>
+            fontSize: "clamp(2.2rem, 3.4vw, 3.8rem)", fontWeight: 600,
+            color: "#1a1f3a", lineHeight: 1.12, margin: "0 0 22px", letterSpacing: "-0.02em" }}>
             Quand la tête comprend,<br/>
-            mais que <em style={{ color: blue, fontStyle: "italic" }}>le corps ne suit plus.</em>
+            mais que <em style={{ color: blue, fontStyle: "italic", whiteSpace: "nowrap" }}>le corps ne suit plus.</em>
           </h1>
 
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
@@ -153,7 +153,7 @@ function Hero({ colors }) {
               style={{ color: blue, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
                 fontSize: "0.9rem", textDecoration: "underline", textUnderlineOffset: 4,
                 display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 4px" }}>
-              Découvrir les expériences <span aria-hidden="true">→</span>
+              Découvrir les séances <span aria-hidden="true">→</span>
             </a>
           </div>
 
@@ -410,95 +410,97 @@ function Problem({ colors }) {
 function About({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
-  const [ref, visible] = useReveal();
+
+  const scrollToSoins = (e) => {
+    e.preventDefault();
+    const el = document.querySelector("#soins");
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: "smooth" });
+  };
 
   return (
-    <section id="apropos" style={{ padding: "100px 24px", background: "#fff" }}>
+    <section id="apropos" style={{ padding: "100px 24px", background: "#f5f3ee" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid",
         gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}
         className="two-col-grid">
         {/* Visual */}
         <RevealBox>
           <div style={{ position: "relative" }}>
-            <div style={{ borderRadius: 28, overflow: "hidden",
-              background: `linear-gradient(135deg, ${blue}18 0%, ${gold}18 100%)`,
-              aspectRatio: "4/5", display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center", padding: 48 }}>
-              {/* Abstract portrait placeholder */}
-              <svg viewBox="0 0 280 320" width="200" fill="none">
-                <defs>
-                  <radialGradient id="aura" cx="50%" cy="40%" r="60%">
-                    <stop offset="0%" stopColor={blue} stopOpacity="0.25"/>
-                    <stop offset="100%" stopColor={gold} stopOpacity="0.1"/>
-                  </radialGradient>
-                </defs>
-                <ellipse cx="140" cy="160" rx="120" ry="140" fill="url(#aura)"/>
-                {/* Silhouette stylisée */}
-                <ellipse cx="140" cy="80" rx="36" ry="40" fill={blue} fillOpacity="0.2"/>
-                <path d="M80 200 Q140 160 200 200 L210 310 H70 Z" fill={blue} fillOpacity="0.12"/>
-                {/* Halo */}
-                {[55, 70, 85].map(r => (
-                  <circle key={r} cx="140" cy="80" r={r} stroke={gold}
-                    strokeWidth="0.8" strokeOpacity="0.3" fill="none"
-                    strokeDasharray={r === 70 ? "4 3" : "none"}/>
-                ))}
-                <circle cx="140" cy="80" r="36" stroke={gold} strokeWidth="1.5" fill="none" strokeOpacity="0.5"/>
-              </svg>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem",
-                color: blue, textAlign: "center", marginTop: 24, fontStyle: "italic",
-                lineHeight: 1.6, opacity: 0.7 }}>
-                Emplacement pour votre photo
-              </p>
-            </div>
+            <div style={{ borderRadius: 28,
+              background: "#e4ecfb url('IMG_9929.jpg') center 25% / cover no-repeat",
+              aspectRatio: "4/5" }}/>
             {/* Accent card */}
-            <div style={{ position: "absolute", bottom: -20, right: -20,
+            <div style={{ position: "absolute", bottom: 24, right: 24, maxWidth: "70%",
               background: "white", borderRadius: 16, padding: "16px 22px",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.1)", border: `1px solid ${gold}30` }}>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem",
-                fontWeight: 700, color: gold, lineHeight: 1 }}>∞</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem",
-                color: "#6b7280", marginTop: 2 }}>Approche holistique</div>
+              boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.7rem",
+                fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+                color: gold, marginBottom: 6 }}>
+                Diplômée
+              </div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem",
+                fontWeight: 600, color: "#1c2340", lineHeight: 1.4 }}>
+                La Trame · Activation de l'énergie vitale
+              </div>
             </div>
           </div>
         </RevealBox>
 
         {/* Text */}
         <RevealBox delay={150}>
-          <div style={{ display: "inline-block", width: 44, height: 3,
-            background: `linear-gradient(90deg, ${blue}, ${gold})`,
-            borderRadius: 2, marginBottom: 20 }}/>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Qui suis-je
+          </div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#1c2340", margin: "0 0 28px", lineHeight: 1.2 }}>
-            Un espace d'écoute,<br/>de douceur et de<br/>reconnexion à soi
+            color: "#1c2340", margin: "0 0 28px", lineHeight: 1.25 }}>
+            Il y a ce que le temps répare.{" "}
+            <em style={{ color: blue, fontStyle: "italic" }}>Et ce qu'il ne répare pas.</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
+            color: "#4a5568", lineHeight: 1.8, marginBottom: 28 }}>
+            Je m'appelle Morgane.<br/>
+            À 20 ans, j'ai perdu ma mère.<br/>
+            J'habitais encore chez elle. Elle était mon pilier, mon repère — et ma propre
+            vie restait à construire.<br/>
+            Pendant des années, j'ai fait ce qu'on fait tous : tenir, avancer, gérer. En
+            apparence, ça fonctionnait. À l'intérieur, quelque chose restait figé — et ni
+            le temps, ni la volonté n'y changeaient rien.<br/>
+            En février 2021, j'ai reçu ma première séance de Trame.
+          </p>
+          <blockquote style={{ margin: "0 0 28px", padding: "2px 0 2px 20px",
+            borderLeft: `3px solid ${gold}`,
+            fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+            fontSize: "1.25rem", color: blue, lineHeight: 1.5, fontWeight: 700 }}>
+            « Ce qui s'est relâché ce jour-là, huit ans n'y étaient pas parvenus. »
+          </blockquote>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
             color: "#4a5568", lineHeight: 1.8, marginBottom: 24 }}>
-            SerenityRituals est né de l'envie de proposer un espace d'écoute, de douceur
-            et de reconnexion à soi. Chaque séance est pensée comme un rituel personnalisé,
-            dans lequel le corps, l'énergie et les émotions sont accueillis avec bienveillance.
+            Je ne cherchais plus à comprendre : mon corps venait de faire ce que ma tête
+            n'avait jamais réussi. Je me suis formée à la Trame dès 2022, diplômée en
+            octobre 2023, puis à l'Activation de l'énergie vitale, à Bali, en 2025.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
-            color: "#4a5568", lineHeight: 1.8, marginBottom: 36 }}>
-            L'approche repose sur l'écoute, la présence, la subtilité des ressentis et le respect
-            du rythme de chaque personne.
+            color: "#4a5568", lineHeight: 1.8, marginBottom: 32 }}>
+            Aujourd'hui, j'accompagne celles et ceux qui portent quelque chose de lourd
+            depuis trop longtemps — passionnée par l'énergie, la reconnexion au corps et
+            la libération de tout ce qui nous alourdit, dans la tête comme dans le corps.
           </p>
-          {[
-            ["Personnalisé", "Chaque séance est pensée selon votre besoin du moment"],
-            ["Bienveillant", "Un cadre chaleureux, sans jugement, à votre rythme"],
-            ["Accessible", "Pour toute personne souhaitant prendre soin d'elle-même"],
-          ].map(([title, desc]) => (
-            <div key={title} style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 16 }}>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: gold,
-                flexShrink: 0, marginTop: 7 }}/>
-              <div>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                  color: "#1c2340", fontSize: "0.95rem" }}>{title} — </span>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", color: "#6b7280",
-                  fontSize: "0.95rem" }}>{desc}</span>
-              </div>
-            </div>
-          ))}
+          <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 28 }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+              fontSize: "1.25rem", color: "#1c2340", lineHeight: 1.6, marginBottom: 20 }}>
+              Si quelque chose en toi attend depuis longtemps, commence par une séance.
+            </p>
+            <a href="#soins" onClick={scrollToSoins}
+              style={{ display: "inline-block", background: blue, color: "#fff",
+                padding: "14px 32px", borderRadius: 50, fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600, fontSize: "0.9rem", textDecoration: "none",
+                transition: "all 0.25s", boxShadow: `0 6px 24px ${blue}35` }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+              Découvrir les séances
+            </a>
+          </div>
         </RevealBox>
       </div>
     </section>
@@ -510,25 +512,27 @@ function Services({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
-  const soins = [
+  const packs = [
     {
-      id: "activation",
-      icon: "✦",
-      name: "Activation de l'énergie vitale",
-      desc: "Un soin destiné à relancer la circulation de l'énergie, réveiller la vitalité intérieure et accompagner une sensation de recentrage et de dynamisme.",
-      benefits: ["Retrouver de l'élan", "Se reconnecter à son énergie", "Apaiser les sensations de fatigue intérieure", "Favoriser un meilleur ancrage"],
+      label: "Pack",
+      name: "3 Trames",
+      price: "255 €",
+      note: "au lieu de 285 €",
+      bg: `${blue}1a`,
+      accent: blue,
     },
     {
-      id: "la-trame",
-      icon: "◈",
-      name: "Soin vibratoire La Trame",
-      desc: "Un soin vibratoire doux qui vise à harmoniser la circulation de l'information dans le corps et à accompagner la libération des tensions émotionnelles.",
-      benefits: ["Apaiser les tensions", "Favoriser la libération émotionnelle", "Retrouver une sensation d'alignement", "Accompagner les périodes de changement"],
+      label: "Pack · Le plus complet",
+      name: "3 Trames + Photostimulation",
+      price: "340 €",
+      note: null,
+      bg: `${gold}26`,
+      accent: "#96731f",
     },
   ];
 
   return (
-    <section id="soins" style={{ padding: "100px 24px", background: "#f6f9ff" }}>
+    <section id="soins" style={{ padding: "100px 24px 48px", background: "#f6f9ff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <RevealBox style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ display: "inline-block", width: 44, height: 3,
@@ -536,98 +540,170 @@ function Services({ colors }) {
             borderRadius: 2, marginBottom: 20 }}/>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#1c2340", margin: "0 0 16px" }}>
-            Les soins proposés
+            color: blue, margin: "0 0 16px" }}>
+            Les séances
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
             color: "#6b7280", maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-            Des accompagnements doux et personnalisés, adaptés à chaque besoin.
+            Relâcher ce qui pèse. Remettre en mouvement ce qui s'est figé
           </p>
         </RevealBox>
 
-        {/* Sub-nav interne section Soins (Apollo Workspaces style) */}
-        <RevealBox delay={120}>
-          <div style={{
-            display: "flex", justifyContent: "center", alignItems: "center",
-            gap: 18, marginBottom: 56, flexWrap: "wrap",
-          }}>
-            <a href="#activation" className="soins-subnav-link"
-              onClick={e => {
-                e.preventDefault();
-                const el = document.querySelector('#activation');
-                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 132, behavior: "smooth" });
-              }}>
-              Activation de l'énergie vitale
-            </a>
-            <span aria-hidden="true" style={{ color: gold, fontSize: 16, opacity: 0.7, lineHeight: 1 }}>·</span>
-            <a href="#la-trame" className="soins-subnav-link"
-              onClick={e => {
-                e.preventDefault();
-                const el = document.querySelector('#la-trame');
-                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 132, behavior: "smooth" });
-              }}>
-              Soin vibratoire La Trame
-            </a>
+        {/* ── Bloc détail "Activation de l'énergie vitale" ─────────────────── */}
+        <RevealBox>
+          <div id="activation" className="seance-detail" style={{ scrollMarginTop: 112 }}>
+            <div className="seance-photo" style={{ borderRadius: 14, overflow: "hidden" }}>
+              <img
+                src="img/activation-bali.webp"
+                loading="lazy"
+                alt="Moment d'une séance d'Activation : participante allongée au sol, accompagnée par la facilitatrice."
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+            <div className="seance-text">
+              <div style={{ display: "inline-block", fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem",
+                fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#96731f",
+                background: `${gold}26`, borderRadius: 50, padding: "6px 16px", marginBottom: 16 }}>
+                Séance collective
+              </div>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 2.6vw, 2.1rem)",
+                fontWeight: 600, color: blue, margin: "0 0 22px", lineHeight: 1.25 }}>
+                Activation de l'énergie vitale
+              </h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+                color: "#4a5568", lineHeight: 1.8, marginBottom: 20 }}>
+                Allongé(e), les yeux fermés, porté(e) par la musique, tu laisses l'énergie
+                circuler — sans rien forcer. Je passe auprès de chacun(e) : parfois une
+                main posée, parfois une présence au-dessus du corps.
+              </p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+                color: "#4a5568", lineHeight: 1.8, marginBottom: 28 }}>
+                Il n'y a rien à faire, rien à réussir. Certains vivent des vagues
+                d'émotion, d'autres un calme profond — c'est le corps qui décide.
+              </p>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24 }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
+                  background: "#fff", border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 50, padding: "9px 18px" }}>
+                  <span style={{ color: "#9ca3af" }}>Durée</span>
+                  {" · "}
+                  <span style={{ fontWeight: 600, color: "#1c2340" }}>2h</span>
+                </span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
+                  background: "#fff", border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 50, padding: "9px 18px", color: "#1c2340", fontWeight: 600 }}>
+                  Studio à Paris ou en ligne
+                </span>
+              </div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", marginBottom: 28 }}>
+                <span style={{ fontWeight: 700, fontSize: "1.3rem", color: "#1c2340" }}>55 €</span>
+                <span style={{ color: "#6b7280", marginLeft: 4 }}>présentiel</span>
+                <span style={{ color: "#9ca3af" }}> · </span>
+                <span style={{ fontWeight: 700, fontSize: "1.3rem", color: "#1c2340" }}>39 €</span>
+                <span style={{ color: "#6b7280", marginLeft: 4 }}>en ligne</span>
+              </div>
+              <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
+                style={{ display: "inline-block", padding: "13px 30px",
+                  background: blue, color: "#fff", borderRadius: 50,
+                  fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "0.9rem",
+                  textDecoration: "none", transition: "all 0.25s",
+                  boxShadow: `0 6px 24px ${blue}35` }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                Réserver une Activation
+              </a>
+            </div>
           </div>
         </RevealBox>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28 }}>
-          {soins.map((s, i) => (
-            <RevealBox key={s.name} delay={i * 80}>
-              <div id={s.id} className="service-card" style={{
-                background: "white", borderRadius: 24, padding: "36px 28px",
-                boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
-                border: "1px solid rgba(26,111,186,0.08)",
-                transition: "all 0.3s ease",
-                height: "100%", display: "flex", flexDirection: "column",
-              }}>
-                <div style={{ fontSize: "1.8rem", color: blue, marginBottom: 16,
-                  width: 52, height: 52, background: `${blue}10`,
-                  borderRadius: 14, display: "flex", alignItems: "center",
-                  justifyContent: "center" }}>
-                  {s.icon}
+        {/* ── Bloc détail "La Trame" (miroir) ───────────────────────────────── */}
+        <RevealBox>
+          <div id="la-trame" className="seance-detail mirror" style={{ marginTop: 56, scrollMarginTop: 112 }}>
+            {/* TODO : remplacer par photo Trame (format vertical, mêmes réglages que photo Activation) */}
+            <div className="seance-photo" style={{ borderRadius: 14, background: "#EAF0FA" }}/>
+            <div className="seance-text">
+              <div style={{ display: "inline-block", fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem",
+                fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#96731f",
+                background: `${gold}26`, borderRadius: 50, padding: "6px 16px", marginBottom: 16 }}>
+                Séance individuelle
+              </div>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 2.6vw, 2.1rem)",
+                fontWeight: 600, color: blue, margin: "0 0 22px", lineHeight: 1.25 }}>
+                La Trame
+              </h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+                color: "#4a5568", lineHeight: 1.8, marginBottom: 20 }}>
+                Tu t'installes allongé(e) sur la table, entièrement habillé(e). Pendant
+                environ 45 minutes, je déroule une séquence précise de gestes posés sur le
+                corps — un protocole codifié, qui remet de l'ordre dans ce qui s'est figé.
+              </p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+                color: "#4a5568", lineHeight: 1.8, marginBottom: 28 }}>
+                Il n'y a rien à faire. Certains sentent de la chaleur, des mouvements
+                intérieurs, d'autres se laissent simplement porter — et le travail
+                continue dans les jours qui suivent.
+              </p>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24 }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
+                  background: "#fff", border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 50, padding: "9px 18px" }}>
+                  <span style={{ color: "#9ca3af" }}>Durée</span>
+                  {" · "}
+                  <span style={{ fontWeight: 600, color: "#1c2340" }}>environ 45 min</span>
+                </span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
+                  background: "#fff", border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 50, padding: "9px 18px", color: "#1c2340", fontWeight: 600 }}>
+                  Villeneuve-Saint-Georges ou en ligne
+                </span>
+              </div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", marginBottom: 28 }}>
+                <span style={{ fontWeight: 700, fontSize: "1.3rem", color: "#1c2340" }}>95 €</span>
+              </div>
+              <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
+                style={{ display: "inline-block", padding: "13px 30px",
+                  background: blue, color: "#fff", borderRadius: 50,
+                  fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "0.9rem",
+                  textDecoration: "none", transition: "all 0.25s",
+                  boxShadow: `0 6px 24px ${blue}35` }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                Réserver une Trame
+              </a>
+            </div>
+          </div>
+        </RevealBox>
+
+        <RevealBox>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+            fontSize: "1.05rem", color: "#4a5568", textAlign: "center",
+            margin: "56px 0 40px" }}>
+            En résumé : la Trame réordonne en douceur, l'Activation remet en mouvement.
+          </p>
+        </RevealBox>
+
+        <div id="packs" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28, scrollMarginTop: 112 }}>
+          {packs.map((p, i) => (
+            <RevealBox key={p.name} delay={i * 80}>
+              <div style={{ background: p.bg, borderRadius: 20, padding: "28px 28px" }}>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.72rem",
+                  fontWeight: 700, color: p.accent, textTransform: "uppercase",
+                  letterSpacing: "0.08em", marginBottom: 10 }}>
+                  {p.label}
                 </div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.35rem",
-                  fontWeight: 600, color: "#1c2340", margin: "0 0 14px", lineHeight: 1.3 }}>
-                  {s.name}
-                </h3>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem",
-                  color: "#6b7280", lineHeight: 1.7, marginBottom: 20, flexGrow: 1 }}>
-                  {s.desc}
-                </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px" }}>
-                  {s.benefits.map(b => (
-                    <li key={b} style={{ display: "flex", alignItems: "center", gap: 8,
-                      fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
-                      color: "#4a5568", marginBottom: 7 }}>
-                      <span style={{ color: gold, fontSize: "1rem" }}>›</span>{b}
-                    </li>
-                  ))}
-                </ul>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
-                  padding: "14px 16px", background: "#f8faff", borderRadius: 12, marginBottom: 16 }}>
-                  <div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.72rem",
-                      color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                      Durée · Tarif
-                    </div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem",
-                      color: "#6b7280", fontStyle: "italic" }}>À définir · Tarif à venir</div>
-                  </div>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem",
+                  fontWeight: 600, color: "#1c2340", marginBottom: 8 }}>
+                  {p.name}
                 </div>
-                <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
-                  style={{ display: "block", textAlign: "center", padding: "11px 0",
-                    borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                    fontSize: "0.875rem", textDecoration: "none", transition: "all 0.25s",
-                    border: `2px solid ${blue}`, color: blue, background: "transparent" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = blue; e.currentTarget.style.color = "#fff"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = blue; }}>
-                  Prendre rendez-vous
-                </a>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.15rem" }}>
+                  <span style={{ fontWeight: 700, color: p.accent }}>{p.price}</span>
+                  {p.note && <span style={{ color: "#6b7280", marginLeft: 6 }}>{p.note}</span>}
+                </div>
               </div>
             </RevealBox>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -638,65 +714,73 @@ function ForWho({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
-  const besoins = [
-    "Fatigue émotionnelle", "Stress ou charge mentale", "Sensation de blocage",
-    "Besoin de recul", "Période de transition personnelle",
-    "Envie de reconnexion à soi", "Recherche d'un moment profond de détente",
+  const points = [
+    "Tu tiens, mais ça te coûte de plus en plus.",
+    "Tu dors, mais tu ne récupères pas vraiment.",
+    "Tu as tout analysé, tout compris — et rien n'a bougé.",
+    "Ton corps reste tendu, même au repos.",
+    "Tu traverses une transition, et ça remue plus que prévu.",
+    "Tu veux relâcher, sans savoir par où commencer.",
   ];
 
   return (
-    <section id="pourqui" style={{ padding: "100px 24px", background: "#fff" }}>
+    <section id="pourqui" style={{ padding: "100px 24px", background: "#f5f3ee" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid",
-        gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}
+        gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "start" }}
         className="two-col-grid">
         <RevealBox>
-          <div style={{ display: "inline-block", width: 44, height: 3,
-            background: `linear-gradient(90deg, ${blue}, ${gold})`,
-            borderRadius: 2, marginBottom: 20 }}/>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Pour qui
+          </div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
             color: "#1c2340", margin: "0 0 24px", lineHeight: 1.25 }}>
-            Pour qui sont ces<br/>soins ?
+            C'est pour toi <em style={{ color: blue, fontStyle: "italic" }}>si...</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
             color: "#4a5568", lineHeight: 1.8, marginBottom: 32 }}>
-            Les soins SerenityRituals s'adressent aux adultes qui ressentent le besoin de faire
-            une pause, de se recentrer, de libérer des tensions émotionnelles ou de retrouver
-            davantage de clarté mentale.
+            Pas besoin d'y croire, ni d'avoir déjà testé quoi que ce soit. Juste de te
+            reconnaître quelque part ici :
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            {besoins.map(b => (
-              <span key={b} style={{ fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.875rem", color: blue, background: `${blue}10`,
-                padding: "8px 16px", borderRadius: 50,
-                border: `1px solid ${blue}20`, lineHeight: 1 }}>
-                {b}
-              </span>
+          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            {points.map(p => (
+              <div key={p} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <path d="M5 13 L10 18 L19 7" stroke={blue} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
+                  color: "#1c2340", lineHeight: 1.6 }}>{p}</span>
+              </div>
             ))}
           </div>
         </RevealBox>
 
         <RevealBox delay={150}>
-          <div style={{ background: `linear-gradient(135deg, ${blue}0e 0%, ${gold}12 100%)`,
-            borderRadius: 28, padding: 48, position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: -30, right: -30, width: 140, height: 140,
-              borderRadius: "50%", background: `${gold}20` }}/>
+          <div style={{ background: "#fff", borderRadius: 24, padding: 44,
+            boxShadow: "0 4px 24px rgba(26,63,186,0.06)" }}>
             <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3.5rem",
-              color: blue, opacity: 0.15, lineHeight: 1, marginBottom: 8 }}>❝</div>
+              color: `${blue}30`, lineHeight: 1, marginBottom: 8 }}>”</div>
             <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem",
               fontStyle: "italic", color: "#1c2340", lineHeight: 1.55,
-              margin: "0 0 24px", fontWeight: 500 }}>
-              "Chaque personne mérite un espace pour se recentrer, souffler, et retrouver
-              sa propre lumière intérieure."
+              margin: "0 0 32px", fontWeight: 500 }}>
+              Tu n'as pas besoin d'être « prête », ni de croire à quoi que ce soit.
+              Ton corps, lui, sait déjà ce qu'il a à déposer.
             </blockquote>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%",
-                background: `linear-gradient(135deg, ${blue}, ${gold})` }}/>
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <div style={{
+                width: 52, height: 52, borderRadius: "50%",
+                overflow: "hidden", flexShrink: 0,
+                backgroundImage: "url('logo-src.png')",
+                backgroundSize: "148%",
+                backgroundPosition: "50% 41%",
+                backgroundRepeat: "no-repeat",
+              }}/>
               <div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                  fontSize: "0.9rem", color: "#1c2340" }}>SerenityRituals</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem",
-                  color: "#6b7280" }}>Soins énergétiques &amp; vibratoires</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+                  fontSize: "1rem", color: "#1c2340" }}>Morgane</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
+                  color: "#6b7280" }}>Fondatrice de Serenity Rituals</div>
               </div>
             </div>
           </div>
@@ -714,7 +798,7 @@ function ProgrammeBlock({ colors }) {
   return (
     <section id="signature" style={{
       position: "relative",
-      padding: "130px 24px 140px",
+      padding: "64px 24px 140px",
       overflow: "hidden",
       background: "#faf9f6",
     }}>
@@ -792,6 +876,15 @@ function ProgrammeBlock({ colors }) {
             <span style={{ width: 40, height: 1, background: gold, opacity: 0.5 }}/>
           </div>
 
+          {/* Accroche */}
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+            fontSize: "clamp(1.15rem, 1.8vw, 1.45rem)", color: "#4a5270",
+            margin: "0 0 18px", lineHeight: 1.5,
+          }}>
+            Tu sens que ça demande plus qu'une séance ?
+          </p>
+
           {/* H2 — éditorial dramatique */}
           <h2 style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -799,7 +892,7 @@ function ProgrammeBlock({ colors }) {
             color: "#1c2340", margin: "0 0 28px", lineHeight: 1.06,
             letterSpacing: "-0.02em",
           }}>
-            Quand tu es prête à aller plus loin —<br/>
+            Quand tu es prêt(e) à aller plus loin<br/>
             <em style={{ color: blue, fontStyle: "italic", fontWeight: 600 }}>
               l'accompagnement complet.
             </em>
@@ -811,7 +904,7 @@ function ProgrammeBlock({ colors }) {
             color: "#4a5270", lineHeight: 1.8,
             maxWidth: 560, margin: "0 auto 56px",
           }}>
-            Trois semaines, trois approches combinées pour accélérer le processus
+            Plusieurs approches combinées, pour accélérer le processus
             et ancrer durablement ce qui se transforme en toi.
           </p>
 

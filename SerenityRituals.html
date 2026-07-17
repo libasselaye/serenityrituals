@@ -18,6 +18,12 @@
     body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1c2340; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     ::selection { background: #1a6fba22; color: #1a6fba; }
 
+    /* Blocs détail "En séance" (page Séances) */
+    .seance-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; }
+    .seance-detail .seance-photo { min-height: 360px; }
+    .seance-detail.mirror .seance-photo { order: 2; }
+    .seance-detail.mirror .seance-text { order: 1; }
+
     /* Responsive helpers */
     /* Hamburger pour <1024px (8 nav items + CTA = trop serré sous 1024) */
     @media (max-width: 1024px) {
@@ -29,6 +35,9 @@
       .process-line { left: 28px !important; }
       .tusens-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
       .approach-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+      .seance-detail { grid-template-columns: 1fr !important; gap: 24px !important; }
+      .seance-detail .seance-photo { order: 0 !important; height: 300px !important; min-height: 0 !important; }
+      .seance-detail .seance-text { order: 1 !important; }
       /* Hero mobile : image fondue en arrière-plan, texte par-dessus */
       #accueil { padding-top: 120px !important; min-height: 380px !important; }
       .hero-img { width: 78% !important; right: -10px !important; object-position: center 18% !important; }
@@ -38,6 +47,7 @@
       .hero-badge { display: flex !important; max-width: 100% !important; overflow: visible !important; border-radius: 12px !important; margin-bottom: 14px !important; }
       .hero-badge span { white-space: normal !important; font-size: 0.58rem !important; line-height: 1.5 !important; }
       .hero-left h1 { font-size: 1.8rem !important; margin-bottom: 12px !important; }
+      .hero-left h1 em { white-space: normal !important; }
       .hero-left p { font-size: 0.88rem !important; margin-bottom: 20px !important; }
       .hero-cta { flex-direction: column !important; gap: 10px !important; }
       .hero-cta a, .hero-cta button { display: block !important; width: 100% !important; box-sizing: border-box !important; text-align: center !important; padding: 12px 20px !important; }
@@ -192,11 +202,11 @@
 <body>
   <div id="root"></div>
 
-  <script type="text/babel" src="tweaks-panel.jsx?v=8"></script>
-  <script type="text/babel" src="sr-header.jsx?v=8"></script>
-  <script type="text/babel" src="sr-sections1.jsx?v=8"></script>
-  <script type="text/babel" src="sr-sections2.jsx?v=8"></script>
-  <script type="text/babel" src="sr-contact.jsx?v=8"></script>
+  <script type="text/babel" src="tweaks-panel.jsx?v=31"></script>
+  <script type="text/babel" src="sr-header.jsx?v=31"></script>
+  <script type="text/babel" src="sr-sections1.jsx?v=31"></script>
+  <script type="text/babel" src="sr-sections2.jsx?v=31"></script>
+  <script type="text/babel" src="sr-contact.jsx?v=31"></script>
 
   <script type="text/babel">
     const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{

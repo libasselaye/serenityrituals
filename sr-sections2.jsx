@@ -6,78 +6,60 @@ function Process({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
+  const scrollTo = (id) => (e) => {
+    e.preventDefault();
+    const el = document.querySelector(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: "smooth" });
+  };
+
   const tiers = [
     {
-      num: "1",
+      title: "Une séance",
+      desc: "Une Trame ou une Activation. Dès la première fois, quelque chose se relâche : le corps s'apaise, la tête s'allège.",
+      linkLabel: "Découvrir les séances",
+      href: "#soins",
+      onClick: scrollTo("#soins"),
       icon: (
-        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
-          <circle cx="28" cy="28" r="10" stroke={gold} strokeWidth="1.5"/>
-          {[0,45,90,135,180,225,270,315].map((deg,i) => {
-            const r = deg * Math.PI / 180;
-            return <line key={i} x1={28+Math.cos(r)*13} y1={28+Math.sin(r)*13}
-              x2={28+Math.cos(r)*20} y2={28+Math.sin(r)*20}
-              stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>;
-          })}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="8" stroke={gold} strokeWidth="1.6"/>
+          <circle cx="12" cy="12" r="2.4" fill={gold}/>
         </svg>
       ),
-      title: "Les soins à l'unité",
-      sub: "UN PREMIER PAS, AVEC DÉJÀ DES EFFETS CONCRETS",
-      bullets: [
-        "Tu peux commencer simplement, avec une séance de Trame ou une Kundalini Activation.",
-        "Dès la première séance, des changements peuvent se faire ressentir : un apaisement, un relâchement, plus de clarté.",
-        "Chaque séance agit là où ton système en a besoin et ouvre déjà un espace différent en toi.",
-      ],
     },
     {
-      num: "2",
+      title: "Un cycle de séances",
+      desc: "Plusieurs séances rapprochées, pour un travail qui descend plus profond et qui s'installe.",
+      linkLabel: "Voir les packs",
+      href: "#packs",
+      onClick: scrollTo("#packs"),
       icon: (
-        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
-          <path d="M28 14 C36 14 42 20 42 28 C42 36 36 42 28 42 C22 42 17 38 16 32" stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M28 20 C33 20 37 24 37 28 C37 32 33 36 28 36" stroke={gold} strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="28" cy="28" r="3" fill={gold}/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M4 9a8 8 0 0 1 13.6-5.7L19 5" stroke={gold} strokeWidth="1.6" strokeLinecap="round" fill="none"/>
+          <path d="M17 2.5v3.5h-3.5" stroke={gold} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          <path d="M20 15a8 8 0 0 1-13.6 5.7L5 19" stroke={gold} strokeWidth="1.6" strokeLinecap="round" fill="none"/>
+          <path d="M7 21.5V18h3.5" stroke={gold} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
         </svg>
       ),
-      title: "Aller plus loin, quand tu es prêt(e)",
-      sub: "APPROFONDIR POUR TRANSFORMER",
-      bullets: [
-        "Au fil des séances, le travail s'approfondit.",
-        "Ton corps s'ouvre, ton énergie circule différemment.",
-        "Les blocages se relâchent en profondeur, les émotions se libèrent, et tu retrouves de plus en plus de clarté, de confiance et d'élan.",
-        "De vrais changements commencent à s'installer.",
-      ],
     },
     {
-      num: "3",
+      title: "Le programme signature",
+      desc: "Un accompagnement complet qui combine plusieurs approches. Tu peux commencer directement ici.",
+      linkLabel: "Découvrir le programme",
+      href: "programmesignature.html",
       icon: (
-        <svg width="28" height="28" viewBox="0 0 56 56" fill="none">
-          <path d="M28 12 L30.5 24 L43 28 L30.5 32 L28 44 L25.5 32 L13 28 L25.5 24 Z" stroke={gold} strokeWidth="1.5" strokeLinejoin="round"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L13.6 10.4 L22 12 L13.6 13.6 L12 22 L10.4 13.6 L2 12 L10.4 10.4 Z"
+            stroke={gold} strokeWidth="1.4" strokeLinejoin="round"/>
         </svg>
       ),
-      title: "Un accompagnement plus complet",
-      sub: "COMBINER POUR ACCÉLÉRER ET STABILISER",
-      bullets: [
-        "Pour celles et ceux qui souhaitent aller plus loin, je propose un accompagnement en 3 semaines qui combine plusieurs approches, dont la Dream Machine.",
-        "Cette synergie permet d'accélérer le processus, d'intégrer durablement les transformations et d'ancrer les changements dans ton quotidien.",
-      ],
     },
   ];
 
   return (
-    <section id="programme" style={{ padding: "96px 24px 80px", background: "#fff", position: "relative", overflow: "hidden" }}>
-      {/* Décor feuille droite */}
-      <div style={{ position: "absolute", right: -40, top: "50%", transform: "translateY(-50%)", opacity: 0.07, pointerEvents: "none" }}>
-        <svg width="280" height="380" viewBox="0 0 280 380" fill="none">
-          <path d="M140 10 C200 60 260 140 240 220 C220 300 160 360 140 370 C120 360 60 300 40 220 C20 140 80 60 140 10Z" fill={gold}/>
-          <line x1="140" y1="10" x2="140" y2="370" stroke={gold} strokeWidth="2"/>
-          {[60,100,140,180,220,260,300,340].map((y,i) => (
-            <path key={i} d={`M140 ${y} Q${i%2===0?180:100} ${y-20} ${i%2===0?220:60} ${y}`} stroke={gold} strokeWidth="1" fill="none"/>
-          ))}
-        </svg>
-      </div>
-
+    <section id="programme" style={{ padding: "96px 24px 88px", background: "#eaf2fd" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Header */}
-        <RevealBox style={{ textAlign: "center", marginBottom: 64 }}>
+        <RevealBox style={{ textAlign: "center", marginBottom: 56 }}>
           <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
             letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
             Mon approche
@@ -89,83 +71,51 @@ function Process({ colors }) {
             <em style={{ color: blue, fontStyle: "italic" }}>à ton rythme.</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-            color: "#6b7280", maxWidth: 520, margin: "0 auto 10px", lineHeight: 1.75 }}>
-            Il n'existe pas un seul chemin pour se libérer. Certaines personnes ont besoin de douceur, d'autres sont prêtes à aller plus loin, plus vite.
-          </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-            color: "#6b7280", maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
-            Mon rôle, c'est de m'adapter à là où tu en es, et de t'accompagner étape par étape.
+            color: blue, maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
+            Il n'y a pas un seul chemin. Trois portes d'entrée — tu choisis celle qui correspond à là où tu en es.
           </p>
         </RevealBox>
 
         {/* 3 colonnes */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}
           className="approach-grid">
           {tiers.map((t, i) => (
             <RevealBox key={i} delay={i * 120}>
               <div style={{
-                padding: "36px 28px 32px",
+                padding: "32px 28px",
                 borderRadius: 20,
                 border: "1px solid rgba(26,111,186,0.08)",
                 background: "#fff",
-                boxShadow: "0 4px 24px rgba(26,63,186,0.05)",
-                height: "100%", display: "flex", flexDirection: "column", gap: 0,
+                boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
+                height: "100%", display: "flex", flexDirection: "column",
               }}>
-                {/* Numéro + icone */}
-                <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-                  <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem",
-                    fontWeight: 700, color: `${gold}50`, lineHeight: 1 }}>{t.num}</span>
+                <div style={{ width: 48, height: 48, background: `${gold}22`,
+                  borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: 22 }}>
                   {t.icon}
                 </div>
-                {/* Titre */}
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem",
-                  fontWeight: 600, color: "#1c2340", margin: "0 0 8px", lineHeight: 1.25 }}>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem",
+                  fontWeight: 600, color: "#1c2340", margin: "0 0 12px", lineHeight: 1.25 }}>
                   {t.title}
                 </h3>
-                {/* Sous-titre */}
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.6rem",
-                  fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
-                  color: blue, margin: "0 0 20px" }}>
-                  {t.sub}
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem",
+                  color: "#6b7280", lineHeight: 1.7, margin: "0 0 24px", flexGrow: 1 }}>
+                  {t.desc}
                 </p>
-                {/* Puces */}
-                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-                  {t.bullets.map((b, j) => (
-                    <li key={j} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <span style={{ color: gold, fontSize: "0.5rem", marginTop: 6, flexShrink: 0 }}>◆</span>
-                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.86rem",
-                        color: "#4a5568", lineHeight: 1.7 }}>{b}</span>
-                    </li>
-                  ))}
-                </ul>
+                <a href={t.href} onClick={t.onClick}
+                  style={{ display: "inline-block", textAlign: "center", padding: "11px 22px",
+                    borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+                    fontSize: "0.875rem", textDecoration: "none", transition: "all 0.25s",
+                    border: `2px solid ${blue}`, color: blue, background: "transparent",
+                    alignSelf: "flex-start" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = blue; e.currentTarget.style.color = "#fff"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = blue; }}>
+                  {t.linkLabel}
+                </a>
               </div>
             </RevealBox>
           ))}
         </div>
-
-        {/* CTA bas */}
-        <RevealBox style={{ textAlign: "center", marginTop: 64 }}>
-          <div style={{ marginBottom: 8 }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2 L13.2 9.8 L21 12 L13.2 14.2 L12 22 L10.8 14.2 L3 12 L10.8 9.8 Z" stroke={gold} strokeWidth="1.2" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-            fontWeight: 500, color: "#1c2340", margin: "0 0 28px", lineHeight: 1.35 }}>
-            Tu peux commencer simplement…<br/>
-            et aller <em style={{ color: blue, fontStyle: "italic" }}>aussi loin que tu le souhaites.</em>
-          </p>
-          <a href="#soins" onClick={e => { e.preventDefault(); const el = document.querySelector('#soins'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: 'smooth' }); } }}
-            style={{ background: blue, color: "#fff", padding: "13px 32px",
-              borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-              fontSize: "0.88rem", textDecoration: "none", display: "inline-block",
-              boxShadow: `0 6px 24px ${blue}35`, transition: "all 0.25s",
-              letterSpacing: "0.02em" }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-            Découvrir les expériences
-          </a>
-        </RevealBox>
       </div>
     </section>
   );
@@ -260,97 +210,57 @@ function Benefits({ colors }) {
   const gold = colors?.gold || "#e8b43a";
 
   const items = [
-    { label: "Apaisement des tensions" },
-    { label: "Meilleure clarté mentale" },
-    { label: "Sensation de légèreté" },
-    { label: "Libération émotionnelle" },
-    { label: "Relaxation profonde" },
-    { label: "Recentrage" },
-    { label: "Reconnexion à soi" },
-    { label: "Regain d'énergie" },
+    "Des tensions qui se relâchent — souvent dès la première séance",
+    "Moins de brouillard, des idées plus nettes",
+    "Une légèreté, comme après avoir déposé quelque chose",
+    "Des émotions qui circulent, au lieu de rester coincées",
+    "Un relâchement profond — rare quand on vit en alerte",
+    "De l'énergie qui revient, et le sentiment de se retrouver",
   ];
 
   return (
-    <section style={{ padding: "130px 24px 130px", background: "#07111f", position: "relative", overflow: "hidden" }}>
-      {/* Top fade — smooth depuis Entreprises #faf9f6 */}
-      <div aria-hidden="true" style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 110,
-        background: "linear-gradient(to bottom, #faf9f6 0%, rgba(250,249,246,0.35) 35%, transparent 100%)",
-        pointerEvents: "none", zIndex: 2,
-      }}/>
-      {/* Bottom fade — smooth vers Testimonials #f6f9ff */}
-      <div aria-hidden="true" style={{
-        position: "absolute", bottom: 0, left: 0, right: 0, height: 110,
-        background: "linear-gradient(to top, #f6f9ff 0%, rgba(246,249,255,0.35) 35%, transparent 100%)",
-        pointerEvents: "none", zIndex: 2,
-      }}/>
-      {/* Ambient glows */}
-      <div aria-hidden="true" style={{ position: "absolute", top: "25%", left: "8%",
-        width: 520, height: 520, borderRadius: "50%",
-        background: `radial-gradient(circle, ${blue}16 0%, transparent 68%)`,
-        pointerEvents: "none" }}/>
-      <div aria-hidden="true" style={{ position: "absolute", bottom: "15%", right: "10%",
-        width: 320, height: 320, borderRadius: "50%",
-        background: `radial-gradient(circle, ${gold}12 0%, transparent 68%)`,
-        pointerEvents: "none" }}/>
-
+    <section style={{ padding: "100px 24px", background: "#eaf2fd" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
-        gap: 72, alignItems: "center", position: "relative", zIndex: 1 }}
+        gap: 72, alignItems: "start" }}
         className="two-col-grid">
 
         <RevealBox>
-          <div style={{ display: "inline-block", width: 44, height: 3,
-            background: `linear-gradient(90deg, ${blue}, ${gold})`,
-            borderRadius: 2, marginBottom: 20 }}/>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Les effets
+          </div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#fff", margin: "0 0 24px", lineHeight: 1.25 }}>
-            Des bienfaits ressentis<br/>
-            <em style={{ color: gold, fontStyle: "italic" }}>en douceur</em>
+            color: "#1c2340", margin: "0 0 24px", lineHeight: 1.25 }}>
+            Des bienfaits ressentis,{" "}
+            <em style={{ color: blue, fontStyle: "italic" }}>en douceur.</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
-            color: "rgba(255,255,255,0.48)", lineHeight: 1.8, marginBottom: 36 }}>
-            Chaque personne vit les séances différemment. Les soins proposés peuvent accompagner
-            un mieux-être global, une sensation d'apaisement, de relâchement ou de clarté intérieure.
+            color: "#4a5568", lineHeight: 1.8, marginBottom: 32 }}>
+            Chaque personne vit la séance différemment. Voici ce qui revient le plus
+            souvent, séance après séance :
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
-            color: "rgba(255,255,255,0.28)", lineHeight: 1.65,
-            borderLeft: `3px solid ${gold}50`, paddingLeft: 16, fontStyle: "italic" }}>
-            Les soins énergétiques ne remplacent pas un avis médical, un diagnostic
-            ou un traitement médical.
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+            fontSize: "1.05rem", color: "#6b7280", lineHeight: 1.6,
+            borderLeft: `3px solid ${gold}`, paddingLeft: 20 }}>
+            Les séances ne remplacent ni un avis médical, ni un diagnostic, ni un
+            traitement. Elles viennent en complément, jamais à la place.
           </p>
         </RevealBox>
 
         <RevealBox delay={150}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-            {items.map((item, i) => (
-              <div key={item.label}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = "scale(1.04)";
-                  e.currentTarget.style.borderColor = `${i % 2 === 0 ? blue : gold}70`;
-                  e.currentTarget.style.boxShadow = `0 0 28px ${i % 2 === 0 ? blue : gold}28`;
-                  e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = "";
-                  e.currentTarget.style.borderColor = `${i % 2 === 0 ? `${blue}28` : `${gold}20`}`;
-                  e.currentTarget.style.boxShadow = "";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                }}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {items.map((item) => (
+              <div key={item}
                 style={{
-                  background: "rgba(255,255,255,0.03)",
-                  borderRadius: 16, padding: "20px 18px",
-                  border: `1px solid ${i % 2 === 0 ? `${blue}28` : `${gold}20`}`,
-                  display: "flex", alignItems: "center", gap: 12,
-                  transition: "all 0.3s ease", cursor: "default",
+                  background: "#fff",
+                  borderRadius: 16, padding: "20px 24px",
+                  boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
                 }}>
-                <div style={{ width: 7, height: 7, borderRadius: "50%", flexShrink: 0,
-                  background: i % 2 === 0 ? blue : gold,
-                  boxShadow: `0 0 10px ${i % 2 === 0 ? blue : gold}` }}/>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem",
-                  color: "rgba(255,255,255,0.78)", fontWeight: 500, lineHeight: 1.3 }}>
-                  {item.label}
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
+                  color: "#1c2340", lineHeight: 1.5 }}>
+                  {item}
                 </span>
               </div>
             ))}
@@ -439,32 +349,32 @@ function FAQ({ colors }) {
 
   const faqs = [
     {
-      q: "Les soins énergétiques remplacent-ils un traitement médical ?",
-      a: "Non. Les soins énergétiques proposés par SerenityRituals ne remplacent pas un avis médical, un diagnostic, un traitement ou un suivi par un professionnel de santé. Ils s'inscrivent dans une démarche complémentaire de mieux-être."
+      q: "Je n'y crois pas trop. C'est un problème ?",
+      a: "Non — il n'y a rien à croire. La séance agit sur le corps et le système nerveux, que la tête soit convaincue ou non. Viens comme tu es."
+    },
+    {
+      q: "Qu'est-ce que je vais ressentir pendant une séance ?",
+      a: "C'est propre à chacun : de la chaleur, un relâchement profond, des émotions qui remontent. Certains ne ressentent rien sur le moment — et c'est dans les jours qui suivent qu'un apaisement s'installe. Dans tous les cas, rien ne fait mal."
+    },
+    {
+      q: "Est-ce que ça remplace un suivi médical ?",
+      a: "Non, jamais. Les séances viennent en complément d'un suivi médical ou psychologique, pas à la place. Je ne pose aucun diagnostic et ne touche à aucun traitement."
+    },
+    {
+      q: "Comment se déroule concrètement une Trame ?",
+      a: "Allongé(e) sur table, entièrement habillé(e). Une séquence précise de gestes posés sur le corps, dans le calme, pendant environ 45 minutes."
     },
     {
       q: "Où se déroulent les séances ?",
-      a: "Les séances peuvent se faire à domicile en Île-de-France ou à distance selon le type d'accompagnement choisi. Les informations pratiques sont précisées lors de la réservation."
+      a: "La Trame : en présentiel à Villeneuve-Saint-Georges, ou en ligne. L'Activation de l'énergie vitale : en studio à Paris — le lieu exact est précisé à l'ouverture de chaque séance présentielle — ou en ligne."
     },
     {
-      q: "Peut-on faire un soin à distance ?",
-      a: "Oui, certains soins et accompagnements peuvent être proposés à distance, notamment les packs one-to-one en ligne."
+      q: "Comment se passe une séance en ligne ?",
+      a: "Depuis chez toi, dans ton propre cocon : un endroit calme, de quoi t'allonger, des écouteurs. Le champ collectif est là, l'expérience tout aussi profonde."
     },
     {
       q: "Combien de séances faut-il prévoir ?",
-      a: "Cela dépend du besoin de chacun. Une séance peut déjà offrir un moment de recentrage, tandis qu'un accompagnement sur plusieurs séances permet un travail plus progressif."
-    },
-    {
-      q: "Comment prendre rendez-vous ?",
-      a: "Vous pouvez prendre rendez-vous directement via le bouton Calendly présent sur le site, ou envoyer un message par email ou Instagram."
-    },
-    {
-      q: "À qui s'adressent les soins ?",
-      a: "Les soins s'adressent aux adultes souhaitant apaiser des tensions, retrouver de la clarté mentale, traverser une période de changement ou simplement s'offrir un moment de reconnexion à soi."
-    },
-    {
-      q: "Les prix sont-ils affichés ?",
-      a: "Oui, les prix seront affichés directement sur le site pour chaque prestation. Les tarifs définitifs seront ajoutés prochainement."
+      a: "Une séance produit déjà des effets réels. Pour un travail de fond, un cycle de trois est le format le plus juste — c'est pour ça que les packs existent."
     },
   ];
 

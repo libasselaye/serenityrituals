@@ -18,7 +18,7 @@ function Header({ colors }) {
   const navItems = [
     { label: "Accueil",             href: "#accueil" },
     { label: "À propos",            href: "#apropos" },
-    { label: "Expériences",         href: "#soins" },
+    { label: "Séances",             href: "#soins" },
     { label: "Programme signature", href: "programmesignature.html" },
     { label: "Entreprises",         href: "#entreprises" },
     { label: "Contact",             href: "#contact" },

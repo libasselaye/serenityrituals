@@ -8,16 +8,15 @@ const INSTAGRAM_URL = "https://instagram.com/serenity.rituals_";
 function Contact({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
-  const [form, setForm] = React.useState({ prenom: "", email: "", soin: "", message: "" });
+  const [form, setForm] = React.useState({ prenom: "", email: "", interet: "", message: "" });
   const [sent, setSent] = React.useState(false);
   const [errors, setErrors] = React.useState({});
 
-  const soins = [
-    "Activation de l'énergie vitale",
-    "Soin vibratoire La Trame",
-    "Photostimulation Dream Machine",
-    "Pack one-to-one en ligne",
-    "Autre / Je ne sais pas encore",
+  const interets = [
+    "Une séance",
+    "Un pack",
+    "Le programme signature",
+    "Je ne sais pas encore",
   ];
 
   const validate = () => {
@@ -45,76 +44,70 @@ function Contact({ colors }) {
 
   const labelStyle = {
     fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem",
-    fontWeight: 600, color: "#374151", marginBottom: 6, display: "block",
+    fontWeight: 600, color: "#1c2340", marginBottom: 6, display: "block",
   };
 
   return (
-    <section id="contact" style={{ padding: "100px 24px", background: "#f6f9ff" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid",
-        gridTemplateColumns: "1fr 1.2fr", gap: 72, alignItems: "start" }}
-        className="two-col-grid">
-        {/* Info */}
-        <RevealBox>
-          <div style={{ display: "inline-block", width: 44, height: 3,
-            background: `linear-gradient(90deg, ${blue}, ${gold})`,
-            borderRadius: 2, marginBottom: 20 }}/>
+    <section id="contact" style={{ padding: "100px 24px", background: "#f5f3ee" }}>
+      <RevealBox style={{ maxWidth: 700, margin: "0 auto" }}>
+        <div style={{ background: "#fffefb", borderRadius: 28, padding: "56px 48px",
+          border: "1px solid rgba(0,0,0,0.07)" }} className="contact-card">
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.16em", textTransform: "uppercase", color: gold, marginBottom: 18 }}>
+            Contact
+          </div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
+            fontSize: "clamp(2rem, 3vw, 2.6rem)", fontWeight: 600,
             color: "#1c2340", margin: "0 0 20px", lineHeight: 1.25 }}>
-            Parlons de vous
+            Une question ? <em style={{ color: blue, fontStyle: "italic" }}>Écris-moi.</em>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
-            color: "#4a5568", lineHeight: 1.8, marginBottom: 40 }}>
-            Pour toute question ou demande particulière, vous pouvez écrire directement
-            via le formulaire, par email ou sur Instagram.
+            color: "#4a5568", lineHeight: 1.8, marginBottom: 32 }}>
+            Si tu hésites entre deux formats, ou si une question te retient avant de
+            réserver — écris-moi. Je te réponds personnellement.
           </p>
 
           {/* Contact cards */}
           {[
-            { icon: "✉", label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-            { icon: "◈", label: "Instagram", value: "@serenityrituals", href: INSTAGRAM_URL },
+            { label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
+            { label: "Instagram", value: "@serenity.rituals_", href: INSTAGRAM_URL },
           ].map(c => (
             <a key={c.label} href={c.href} target="_blank" rel="noreferrer"
-              style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16,
+              style={{ display: "block", marginBottom: 16,
                 padding: "18px 22px", background: "white", borderRadius: 16,
-                textDecoration: "none", border: `1px solid ${blue}10`,
-                boxShadow: "0 2px 12px rgba(26,63,186,0.05)", transition: "all 0.25s" }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 6px 24px ${blue}15`; e.currentTarget.style.transform = "translateX(4px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,63,186,0.05)"; e.currentTarget.style.transform = ""; }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12,
-                background: `${blue}10`, display: "flex", alignItems: "center",
-                justifyContent: "center", fontSize: "1.2rem", color: blue, flexShrink: 0 }}>
-                {c.icon}
+                textDecoration: "none", border: "1px solid rgba(0,0,0,0.06)",
+                transition: "all 0.25s" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = `${blue}40`; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)"; }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.72rem",
+                color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+                {c.label}
               </div>
-              <div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.78rem",
-                  color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                  {c.label}
-                </div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
-                  color: "#1c2340", fontSize: "0.95rem" }}>{c.value}</div>
-              </div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+                color: "#1c2340", fontSize: "1rem" }}>{c.value}</div>
             </a>
           ))}
 
-          <div style={{ marginTop: 32 }}>
-            <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 10,
-                background: blue, color: "#fff", padding: "14px 28px",
-                borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                fontSize: "0.95rem", textDecoration: "none",
-                boxShadow: `0 6px 24px ${blue}40`, transition: "all 0.25s" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-              Prendre rendez-vous →
-            </a>
-          </div>
-        </RevealBox>
+          <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", margin: "24px 0 24px" }}/>
 
-        {/* Form */}
-        <RevealBox delay={150}>
-          <div style={{ background: "white", borderRadius: 24, padding: "40px",
-            boxShadow: "0 8px 40px rgba(26,63,186,0.07)",
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+            color: "#4a5568", marginBottom: 16 }}>
+            Tu sais déjà ce qu'il te faut ?
+          </p>
+          <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
+            style={{ display: "inline-flex", alignItems: "center", gap: 10,
+              background: blue, color: "#fff", padding: "14px 28px",
+              borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+              fontSize: "0.95rem", textDecoration: "none",
+              boxShadow: `0 6px 24px ${blue}40`, transition: "all 0.25s", marginBottom: 40 }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+            Réserver ma séance →
+          </a>
+
+          {/* Form */}
+          <div style={{ background: "white", borderRadius: 24, padding: "36px",
+            boxShadow: "0 8px 40px rgba(26,63,186,0.06)",
             border: "1px solid rgba(26,111,186,0.08)" }}>
             {sent ? (
               <div style={{ textAlign: "center", padding: "40px 20px" }}>
@@ -122,14 +115,15 @@ function Contact({ colors }) {
                 <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.8rem",
                   color: "#1c2340", marginBottom: 12 }}>Message envoyé</h3>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#6b7280",
-                  lineHeight: 1.7 }}>Merci pour votre message. Je vous répondrai dans les meilleurs délais.</p>
+                  lineHeight: 1.7 }}>Merci pour ton message. Je te répondrai dans les meilleurs délais.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}
+                  className="contact-form-row">
                   <div>
-                    <label style={labelStyle}>Prénom *</label>
-                    <input type="text" placeholder="Votre prénom" value={form.prenom}
+                    <label style={labelStyle}>Ton prénom *</label>
+                    <input type="text" placeholder="Prénom" value={form.prenom}
                       onChange={e => { setForm({...form, prenom: e.target.value}); setErrors({...errors, prenom: ""}); }}
                       style={inputStyle(errors.prenom)}
                       onFocus={e => e.target.style.borderColor = blue}
@@ -137,8 +131,8 @@ function Contact({ colors }) {
                     {errors.prenom && <span style={{ fontSize: "0.78rem", color: "#ef4444" }}>{errors.prenom}</span>}
                   </div>
                   <div>
-                    <label style={labelStyle}>Email *</label>
-                    <input type="email" placeholder="votre@email.com" value={form.email}
+                    <label style={labelStyle}>Ton email *</label>
+                    <input type="email" placeholder="prenom@email.com" value={form.email}
                       onChange={e => { setForm({...form, email: e.target.value}); setErrors({...errors, email: ""}); }}
                       style={inputStyle(errors.email)}
                       onFocus={e => e.target.style.borderColor = blue}
@@ -147,18 +141,18 @@ function Contact({ colors }) {
                   </div>
                 </div>
                 <div style={{ marginBottom: 16 }}>
-                  <label style={labelStyle}>Type de soin souhaité</label>
-                  <select value={form.soin} onChange={e => setForm({...form, soin: e.target.value})}
+                  <label style={labelStyle}>Ce qui t'intéresse</label>
+                  <select value={form.interet} onChange={e => setForm({...form, interet: e.target.value})}
                     style={{ ...inputStyle(false), appearance: "none",
                       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
                       backgroundRepeat: "no-repeat", backgroundPosition: "right 14px center" }}>
-                    <option value="">Sélectionner un soin...</option>
-                    {soins.map(s => <option key={s} value={s}>{s}</option>)}
+                    <option value="">Une séance · un pack · le programme · je ne sais pas encore</option>
+                    {interets.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div style={{ marginBottom: 24 }}>
-                  <label style={labelStyle}>Message *</label>
-                  <textarea placeholder="Partagez votre besoin, vos questions..." value={form.message}
+                  <label style={labelStyle}>Ton message *</label>
+                  <textarea placeholder="Ta question, en quelques mots." value={form.message}
                     onChange={e => { setForm({...form, message: e.target.value}); setErrors({...errors, message: ""}); }}
                     style={{ ...inputStyle(errors.message), minHeight: 120, resize: "vertical", lineHeight: 1.6 }}
                     onFocus={e => e.target.style.borderColor = blue}
@@ -172,13 +166,13 @@ function Contact({ colors }) {
                     boxShadow: `0 6px 20px ${blue}35`, transition: "all 0.25s" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-                  Envoyer le message
+                  Envoyer
                 </button>
               </form>
             )}
           </div>
-        </RevealBox>
-      </div>
+        </div>
+      </RevealBox>
     </section>
   );
 }
@@ -198,7 +192,7 @@ function Footer({ colors }) {
   const links = [
     { label: "Accueil",             href: "#accueil" },
     { label: "À propos",            href: "#apropos" },
-    { label: "Expériences",         href: "#soins" },
+    { label: "Séances",             href: "#soins" },
     { label: "Programme signature", href: "programmesignature.html" },
     { label: "Entreprises",         href: "#entreprises" },
     { label: "Contact",             href: "#contact" },
@@ -213,9 +207,9 @@ function Footer({ colors }) {
         pointerEvents: "none", zIndex: 1,
       }}/>
       <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr",
+        <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr",
           gap: 48, marginBottom: 48 }} className="footer-grid">
-          {/* Brand */}
+          {/* Brand + Réserver */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <div style={{ width: 38, height: 38, borderRadius: "50%",
@@ -236,31 +230,56 @@ function Footer({ colors }) {
             </div>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
               color: "rgba(255,255,255,0.5)", lineHeight: 1.75, maxWidth: 280, marginBottom: 24 }}>
-              Séances en Île-de-France<br/>
-              À distance dans toute la francophonie
+              Séances en Île-de-France.<br/>
+              En ligne, partout en francophonie.
             </p>
-            <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ display: "flex", gap: 12, marginBottom: 44 }}>
               <a href={`mailto:${EMAIL}`}
                 style={{ width: 38, height: 38, borderRadius: "50%",
                   background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  color: "rgba(255,255,255,0.6)", textDecoration: "none", fontSize: "1rem",
+                  color: "rgba(255,255,255,0.6)", textDecoration: "none",
                   transition: "all 0.25s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = blue; e.currentTarget.style.color = "#fff"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}>
-                ✉
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+                  <path d="M3 6.5 L12 13 L21 6.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </a>
               <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"
                 style={{ width: 38, height: 38, borderRadius: "50%",
                   background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  color: "rgba(255,255,255,0.6)", textDecoration: "none", fontSize: "0.85rem",
-                  fontFamily: "'DM Sans', sans-serif", fontWeight: 700, transition: "all 0.25s" }}
+                  color: "rgba(255,255,255,0.6)", textDecoration: "none",
+                  transition: "all 0.25s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = gold; e.currentTarget.style.color = "#fff"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}>
-                in
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                </svg>
               </a>
             </div>
+
+            <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem",
+              fontWeight: 600, color: gold, letterSpacing: "0.1em",
+              textTransform: "uppercase", marginBottom: 20 }}>Réserver</h4>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
+              color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 20 }}>
+              Prêt(e) à commencer ? Réserve ta séance directement en ligne.
+            </p>
+            <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
+              style={{ display: "inline-block", padding: "12px 24px",
+                background: `linear-gradient(135deg, ${blue}, #2563b0)`,
+                color: "#fff", borderRadius: 50, fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600, fontSize: "0.875rem", textDecoration: "none",
+                transition: "all 0.25s", boxShadow: `0 4px 16px ${blue}40` }}
+              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-1px)"}
+              onMouseLeave={e => e.currentTarget.style.transform = ""}>
+              Prendre rendez-vous
+            </a>
           </div>
 
           {/* Navigation */}
@@ -285,27 +304,6 @@ function Footer({ colors }) {
               );
             })}
           </div>
-
-          {/* CTA */}
-          <div>
-            <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem",
-              fontWeight: 600, color: gold, letterSpacing: "0.1em",
-              textTransform: "uppercase", marginBottom: 20 }}>Réserver</h4>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem",
-              color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 20 }}>
-              Prêt(e) à prendre soin de vous ? Réservez une séance directement en ligne.
-            </p>
-            <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
-              style={{ display: "inline-block", padding: "12px 24px",
-                background: `linear-gradient(135deg, ${blue}, #2563b0)`,
-                color: "#fff", borderRadius: 50, fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 600, fontSize: "0.875rem", textDecoration: "none",
-                transition: "all 0.25s", boxShadow: `0 4px 16px ${blue}40` }}
-              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-1px)"}
-              onMouseLeave={e => e.currentTarget.style.transform = ""}>
-              Prendre rendez-vous
-            </a>
-          </div>
         </div>
 
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 28,
@@ -317,7 +315,7 @@ function Footer({ colors }) {
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem",
             color: "rgba(255,255,255,0.3)", margin: 0, maxWidth: 500, textAlign: "right" }}>
-            Les soins proposés ne remplacent pas un avis médical, un diagnostic ou un traitement médical.
+            Les séances ne remplacent ni un avis médical, ni un diagnostic, ni un traitement.
           </p>
         </div>
       </div>
