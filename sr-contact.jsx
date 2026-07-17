@@ -327,12 +327,12 @@ function Footer({ colors }) {
 function ScrollDots() {
   const items = React.useMemo(() => ([
     { id: "accueil",      label: "Accueil" },
-    { id: "apropos",      label: "À propos" },
     { id: "soins",        label: "Soins" },
     { id: "signature",    label: "Signature" },
-    { id: "entreprises",  label: "Entreprises" },
+    { id: "apropos",      label: "À propos" },
     { id: "temoignages",  label: "Témoignages" },
     { id: "faq",          label: "FAQ" },
+    { id: "entreprises",  label: "Entreprises" },
     { id: "contact",      label: "Contact" },
   ]), []);
   const [active, setActive] = React.useState(0);

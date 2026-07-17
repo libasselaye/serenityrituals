@@ -349,16 +349,8 @@ function FAQ({ colors }) {
 
   const faqs = [
     {
-      q: "Je n'y crois pas trop. C'est un problème ?",
-      a: "Non — il n'y a rien à croire. La séance agit sur le corps et le système nerveux, que la tête soit convaincue ou non. Viens comme tu es."
-    },
-    {
       q: "Qu'est-ce que je vais ressentir pendant une séance ?",
       a: "C'est propre à chacun : de la chaleur, un relâchement profond, des émotions qui remontent. Certains ne ressentent rien sur le moment — et c'est dans les jours qui suivent qu'un apaisement s'installe. Dans tous les cas, rien ne fait mal."
-    },
-    {
-      q: "Est-ce que ça remplace un suivi médical ?",
-      a: "Non, jamais. Les séances viennent en complément d'un suivi médical ou psychologique, pas à la place. Je ne pose aucun diagnostic et ne touche à aucun traitement."
     },
     {
       q: "Comment se déroule concrètement une Trame ?",
@@ -375,6 +367,14 @@ function FAQ({ colors }) {
     {
       q: "Combien de séances faut-il prévoir ?",
       a: "Une séance produit déjà des effets réels. Pour un travail de fond, un cycle de trois est le format le plus juste — c'est pour ça que les packs existent."
+    },
+    {
+      q: "Je n'y crois pas trop. C'est un problème ?",
+      a: "Non — il n'y a rien à croire. La séance agit sur le corps et le système nerveux, que la tête soit convaincue ou non. Viens comme tu es."
+    },
+    {
+      q: "Est-ce que ça remplace un suivi médical ?",
+      a: "Non, jamais. Les séances viennent en complément d'un suivi médical ou psychologique, pas à la place. Je ne pose aucun diagnostic et ne touche à aucun traitement."
     },
   ];
 

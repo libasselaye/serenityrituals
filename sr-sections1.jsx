@@ -740,7 +740,7 @@ function ForWho({ colors }) {
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.02rem",
             color: "#4a5568", lineHeight: 1.8, marginBottom: 32 }}>
-            Pas besoin d'y croire, ni d'avoir déjà testé quoi que ce soit. Juste de te
+            Pas besoin d'avoir déjà testé quoi que ce soit — juste de te
             reconnaître quelque part ici :
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
@@ -764,8 +764,8 @@ function ForWho({ colors }) {
             <blockquote style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem",
               fontStyle: "italic", color: "#1c2340", lineHeight: 1.55,
               margin: "0 0 32px", fontWeight: 500 }}>
-              Tu n'as pas besoin d'être « prête », ni de croire à quoi que ce soit.
-              Ton corps, lui, sait déjà ce qu'il a à déposer.
+              Ton corps sait déjà ce qu'il a à déposer. Mon travail, c'est de lui
+              en donner l'espace.
             </blockquote>
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <div style={{
