@@ -148,69 +148,78 @@ function Entreprises({ colors }) {
         </RevealBox>
 
         <RevealBox delay={120}>
-          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 480px)",
+          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 760px)",
             justifyContent: "center", gap: 28 }}>
-            <div className="service-card" style={{
+            <div className="service-card entreprise-grid" style={{
               background: "white", borderRadius: 24, padding: "36px 32px",
               boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
               border: "1px solid rgba(26,111,186,0.08)",
               transition: "all 0.3s ease",
-              display: "flex", flexDirection: "column",
+              display: "grid", gridTemplateColumns: "1fr 260px", gap: 36, alignItems: "stretch",
             }}>
-              <div style={{ fontSize: "1.8rem", color: blue, marginBottom: 16,
-                width: 52, height: 52, background: `${blue}10`,
-                borderRadius: 14, display: "flex", alignItems: "center",
-                justifyContent: "center" }}>
-                ◎
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ fontSize: "1.8rem", color: blue, marginBottom: 16,
+                  width: 52, height: 52, background: `${blue}10`,
+                  borderRadius: 14, display: "flex", alignItems: "center",
+                  justifyContent: "center" }}>
+                  ◎
+                </div>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.45rem",
+                  fontWeight: 600, color: "#1c2340", margin: "0 0 14px", lineHeight: 1.3 }}>
+                  Pause régénérante — Photostimulation
+                </h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.94rem",
+                  color: "#6b7280", lineHeight: 1.7, marginBottom: 22 }}>
+                  Une expérience de photostimulation par fréquences lumineuses, qui induit
+                  un état proche de la méditation profonde. En 15 à 20 minutes par
+                  collaborateur, le système nerveux passe du mode « alerte » à une
+                  récupération réelle.
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px" }}>
+                  {["Régulation du stress et de la charge mentale",
+                    "Récupération profonde en un temps court",
+                    "Concentration et clarté retrouvées pour la suite de la journée"].map(b => (
+                    <li key={b} style={{ display: "flex", alignItems: "center", gap: 8,
+                      fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                      color: "#4a5568", marginBottom: 7 }}>
+                      <span style={{ color: gold, fontSize: "1rem" }}>›</span>{b}
+                    </li>
+                  ))}
+                </ul>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                  color: "#6b7280", lineHeight: 1.7, marginBottom: 16 }}>
+                  Côté logistique, trois choses suffisent : une pièce calme à l'écart
+                  (la séance utilise des flashs lumineux), un fauteuil confortable, une
+                  prise électrique. J'apporte tout le reste.
+                </p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                  color: "#4a5568", lineHeight: 1.7, marginBottom: 24 }}>
+                  <strong style={{ color: "#1c2340" }}>Formats</strong> : demi-journée (à
+                  partir de 480 € HT) ou journée complète — séminaire, team building ou
+                  intervention régulière.
+                </p>
+                <a href="mailto:hello@serenityrituals.fr?subject=Demande%20de%20devis%20%E2%80%94%20Pause%20r%C3%A9g%C3%A9n%C3%A9rante%20en%20entreprise"
+                  style={{ display: "block", textAlign: "center", padding: "12px 0",
+                    borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+                    fontSize: "0.9rem", textDecoration: "none", transition: "all 0.25s",
+                    background: blue, color: "#fff",
+                    boxShadow: `0 6px 22px ${blue}35` }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                  Demander un devis
+                </a>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem",
+                  color: "#9ca3af", textAlign: "center", marginTop: 12 }}>
+                  ou par email : hello@serenityrituals.fr
+                </p>
               </div>
-              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.45rem",
-                fontWeight: 600, color: "#1c2340", margin: "0 0 14px", lineHeight: 1.3 }}>
-                Pause régénérante — Photostimulation
-              </h3>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.94rem",
-                color: "#6b7280", lineHeight: 1.7, marginBottom: 22 }}>
-                Une expérience de photostimulation par fréquences lumineuses, qui induit
-                un état proche de la méditation profonde. En 15 à 20 minutes par
-                collaborateur, le système nerveux passe du mode « alerte » à une
-                récupération réelle.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px" }}>
-                {["Régulation du stress et de la charge mentale",
-                  "Récupération profonde en un temps court",
-                  "Concentration et clarté retrouvées pour la suite de la journée"].map(b => (
-                  <li key={b} style={{ display: "flex", alignItems: "center", gap: 8,
-                    fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
-                    color: "#4a5568", marginBottom: 7 }}>
-                    <span style={{ color: gold, fontSize: "1rem" }}>›</span>{b}
-                  </li>
-                ))}
-              </ul>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
-                color: "#6b7280", lineHeight: 1.7, marginBottom: 16 }}>
-                Côté logistique, trois choses suffisent : une pièce calme à l'écart
-                (la séance utilise des flashs lumineux), un fauteuil confortable, une
-                prise électrique. J'apporte tout le reste.
-              </p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
-                color: "#4a5568", lineHeight: 1.7, marginBottom: 24 }}>
-                <strong style={{ color: "#1c2340" }}>Formats</strong> : demi-journée (à
-                partir de 480 € HT) ou journée complète — séminaire, team building ou
-                intervention régulière.
-              </p>
-              <a href="mailto:hello@serenityrituals.fr?subject=Demande%20de%20devis%20%E2%80%94%20Pause%20r%C3%A9g%C3%A9n%C3%A9rante%20en%20entreprise"
-                style={{ display: "block", textAlign: "center", padding: "12px 0",
-                  borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
-                  fontSize: "0.9rem", textDecoration: "none", transition: "all 0.25s",
-                  background: blue, color: "#fff",
-                  boxShadow: `0 6px 22px ${blue}35` }}
-                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-                Demander un devis
-              </a>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem",
-                color: "#9ca3af", textAlign: "center", marginTop: 12 }}>
-                ou par email : hello@serenityrituals.fr
-              </p>
+              <div className="entreprise-photo" style={{ background: "#ecf0fa",
+                borderRadius: 14, overflow: "hidden", display: "flex",
+                alignItems: "center", justifyContent: "center" }}>
+                <img src="img/dream-machine.webp" loading="lazy"
+                  alt="La Dream Machine, dispositif de photostimulation utilisé lors des séances Pause régénérante en entreprise."
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }}/>
+              </div>
             </div>
           </div>
         </RevealBox>

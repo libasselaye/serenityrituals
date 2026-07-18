@@ -514,20 +514,12 @@ function Services({ colors }) {
 
   const packs = [
     {
-      label: "Pack",
+      label: "Le format le plus choisi",
       name: "3 Trames",
       price: "255 €",
       note: "au lieu de 285 €",
       bg: `${blue}1a`,
       accent: blue,
-    },
-    {
-      label: "Pack · Le plus complet",
-      name: "3 Trames + Photostimulation",
-      price: "340 €",
-      note: null,
-      bg: `${gold}26`,
-      accent: "#96731f",
     },
   ];
 
@@ -682,9 +674,9 @@ function Services({ colors }) {
           </p>
         </RevealBox>
 
-        <div id="packs" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28, scrollMarginTop: 112 }}>
+        <div id="packs" style={{ display: "flex", justifyContent: "center", scrollMarginTop: 112 }}>
           {packs.map((p, i) => (
-            <RevealBox key={p.name} delay={i * 80}>
+            <RevealBox key={p.name} delay={i * 80} style={{ width: "100%", maxWidth: 400 }}>
               <div style={{ background: p.bg, borderRadius: 20, padding: "28px 28px" }}>
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.72rem",
                   fontWeight: 700, color: p.accent, textTransform: "uppercase",
