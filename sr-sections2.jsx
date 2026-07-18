@@ -165,19 +165,19 @@ function Entreprises({ colors }) {
               </div>
               <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.45rem",
                 fontWeight: 600, color: "#1c2340", margin: "0 0 14px", lineHeight: 1.3 }}>
-                Photostimulation Dream Machine
+                Pause régénérante — Photostimulation
               </h3>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.94rem",
                 color: "#6b7280", lineHeight: 1.7, marginBottom: 22 }}>
-                Une expérience immersive de photostimulation qui invite à la relaxation profonde,
-                à l'exploration intérieure et à l'apaisement mental. Format adaptable :
-                individuel, petit groupe ou événement d'entreprise.
+                Une expérience de photostimulation par fréquences lumineuses, qui induit
+                un état proche de la méditation profonde. En 15 à 20 minutes par
+                collaborateur, le système nerveux passe du mode « alerte » à une
+                récupération réelle.
               </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px" }}>
-                {["Favoriser la détente mentale",
-                  "Accompagner le lâcher-prise",
-                  "Stimuler l'imaginaire intérieur",
-                  "Créer un moment de pause profonde"].map(b => (
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 22px" }}>
+                {["Régulation du stress et de la charge mentale",
+                  "Récupération profonde en un temps court",
+                  "Concentration et clarté retrouvées pour la suite de la journée"].map(b => (
                   <li key={b} style={{ display: "flex", alignItems: "center", gap: 8,
                     fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
                     color: "#4a5568", marginBottom: 7 }}>
@@ -185,8 +185,19 @@ function Entreprises({ colors }) {
                   </li>
                 ))}
               </ul>
-              <a href="#contact"
-                onClick={e => { e.preventDefault(); const el = document.querySelector('#contact'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 112, behavior: 'smooth' }); } }}
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                color: "#6b7280", lineHeight: 1.7, marginBottom: 16 }}>
+                Côté logistique, trois choses suffisent : une pièce calme à l'écart
+                (la séance utilise des flashs lumineux), un fauteuil confortable, une
+                prise électrique. J'apporte tout le reste.
+              </p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                color: "#4a5568", lineHeight: 1.7, marginBottom: 24 }}>
+                <strong style={{ color: "#1c2340" }}>Formats</strong> : demi-journée (à
+                partir de 480 € HT) ou journée complète — séminaire, team building ou
+                intervention régulière.
+              </p>
+              <a href="mailto:hello@serenityrituals.fr?subject=Demande%20de%20devis%20%E2%80%94%20Pause%20r%C3%A9g%C3%A9n%C3%A9rante%20en%20entreprise"
                 style={{ display: "block", textAlign: "center", padding: "12px 0",
                   borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
                   fontSize: "0.9rem", textDecoration: "none", transition: "all 0.25s",
@@ -196,6 +207,10 @@ function Entreprises({ colors }) {
                 onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
                 Demander un devis
               </a>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem",
+                color: "#9ca3af", textAlign: "center", marginTop: 12 }}>
+                ou par email : hello@serenityrituals.fr
+              </p>
             </div>
           </div>
         </RevealBox>
@@ -351,6 +366,10 @@ function FAQ({ colors }) {
     {
       q: "Qu'est-ce que je vais ressentir pendant une séance ?",
       a: "C'est propre à chacun : de la chaleur, un relâchement profond, des émotions qui remontent. Certains ne ressentent rien sur le moment — et c'est dans les jours qui suivent qu'un apaisement s'installe. Dans tous les cas, rien ne fait mal."
+    },
+    {
+      q: "Est-ce que je reste conscient(e) pendant l'Activation de l'énergie vitale ?",
+      a: "Oui, du début à la fin. L'Activation peut amener dans un état modifié de conscience — quelque chose entre veille et sommeil, proche d'une méditation profonde. On parle parfois de transe consciente : le corps se laisse traverser, mais tu entends la musique, tu peux bouger, ouvrir les yeux, t'arrêter à tout moment. Rien ne se fait sans toi."
     },
     {
       q: "Comment se déroule concrètement une Trame ?",
