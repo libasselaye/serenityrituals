@@ -157,6 +157,12 @@ function Hero({ colors }) {
             </a>
           </div>
 
+          {/* Photo en bandeau — mobile uniquement, sous le bloc texte */}
+          <img src="img/acceuil_img.png" alt="" aria-hidden="true" className="hero-img-mobile" style={{
+            display: "none", width: "100%", height: 280, objectFit: "cover",
+            objectPosition: "70% 22%", borderRadius: 16, marginTop: 28,
+          }}/>
+
         </div>
 
         {/* Right — image de fond visible dans cet espace */}
@@ -292,8 +298,8 @@ function Problem({ colors }) {
 
   return (
     <section style={{ background: bg, position: "relative", overflow: "hidden" }}>
-      {/* Image pleine hauteur à droite, absolue */}
-      <div style={{
+      {/* Image pleine hauteur à droite, absolue — desktop uniquement */}
+      <div className="problem-photo-desktop" style={{
         position: "absolute", top: 0, right: 0, bottom: 0, width: "52%",
         overflow: "hidden",
       }}>
@@ -399,6 +405,13 @@ function Problem({ colors }) {
               </div>
             </div>
           </div>
+
+          {/* Photo en bandeau — mobile uniquement, sous le texte */}
+          <img src="img/homepage_img.png" alt="Séance d'harmonisation énergétique"
+            className="problem-photo-mobile" style={{
+              display: "none", width: "100%", height: 300, objectFit: "cover",
+              objectPosition: "center 25%", borderRadius: 16, marginTop: 40,
+            }}/>
         </div>
       </div>
     </section>

@@ -42,10 +42,14 @@
       .entreprise-grid .entreprise-photo { order: -1 !important; width: 70% !important;
         max-width: 70% !important; height: auto !important; aspect-ratio: 900 / 1273 !important;
         margin: 0 auto 24px !important; }
-      /* Hero mobile : image fondue en arrière-plan, texte par-dessus */
-      #accueil { padding-top: 120px !important; min-height: 380px !important; }
-      .hero-img { width: 78% !important; right: -10px !important; object-position: center 18% !important; }
-      .hero-gradient-left { background: linear-gradient(to right, rgba(250,252,255,1) 0%, rgba(250,252,255,0.97) 40%, rgba(250,252,255,0.68) 60%, rgba(250,252,255,0) 82%) !important; }
+      /* Hero mobile : texte sur fond uni, photo en bandeau séparé sous le texte */
+      #accueil { padding-top: 120px !important; min-height: 0 !important; }
+      .hero-img { display: none !important; }
+      .hero-img-mobile { display: block !important; }
+      .hero-gradient-left, .hero-rings { display: none !important; }
+      /* Problème mobile : texte sur fond uni, photo en bandeau séparé sous le texte */
+      .problem-photo-desktop { display: none !important; }
+      .problem-photo-mobile { display: block !important; }
       .hero-grid { padding: 0 20px 28px !important; gap: 0 !important; overflow: hidden !important; }
       .hero-left { min-width: 0 !important; overflow: hidden !important; }
       .hero-badge { display: flex !important; max-width: 100% !important; overflow: visible !important; border-radius: 12px !important; margin-bottom: 14px !important; }
@@ -206,11 +210,11 @@
 <body>
   <div id="root"></div>
 
-  <script type="text/babel" src="tweaks-panel.jsx?v=37"></script>
-  <script type="text/babel" src="sr-header.jsx?v=37"></script>
-  <script type="text/babel" src="sr-sections1.jsx?v=37"></script>
-  <script type="text/babel" src="sr-sections2.jsx?v=37"></script>
-  <script type="text/babel" src="sr-contact.jsx?v=37"></script>
+  <script type="text/babel" src="tweaks-panel.jsx?v=38"></script>
+  <script type="text/babel" src="sr-header.jsx?v=38"></script>
+  <script type="text/babel" src="sr-sections1.jsx?v=38"></script>
+  <script type="text/babel" src="sr-sections2.jsx?v=38"></script>
+  <script type="text/babel" src="sr-contact.jsx?v=38"></script>
 
   <script type="text/babel">
     const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
