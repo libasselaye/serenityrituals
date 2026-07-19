@@ -421,16 +421,26 @@ function FAQ({ colors }) {
       q: "Où se déroulent les séances ?",
       a: [
         "La Trame : en présentiel à Villeneuve-Saint-Georges, ou en ligne.",
-        "L'Activation de l'énergie vitale : en studio à Paris — le lieu exact est précisé à l'ouverture de chaque séance présentielle — ou en ligne.",
+        "L'Activation de l'énergie vitale : en studio à Paris ou en ligne — le lieu exact du studio est précisé à l'ouverture de chaque séance présentielle.",
       ],
       photo: {
         src: "img/cabinet.webp",
         alt: "Le cabinet de séance à Villeneuve-Saint-Georges : table de soin, lumière naturelle, vue sur le jardin.",
       },
+      transport: [
+        { icon: "cable-car-svg",
+          text: "Câble C1 (téléphérique) depuis le terminus de la ligne 8, Pointe du Lac, jusqu'à l'arrêt Villa Nova — puis 5 minutes à pied." },
+        { icon: "ti-train",
+          text: "RER D jusqu'à la gare de Villeneuve-Saint-Georges, puis bus 427 — environ 9 minutes." },
+      ],
+      transportNote: "L'adresse précise te sera envoyée après confirmation de ta réservation.",
     },
     {
       q: "Comment se passe une séance en ligne ?",
-      a: "Depuis chez toi, dans ton propre cocon : un endroit calme, de quoi t'allonger, des écouteurs. Le champ collectif est là, l'expérience tout aussi profonde."
+      a: [
+        "Depuis chez toi, dans ton propre cocon : un endroit calme, de quoi t'allonger, un casque sur les oreilles. Le champ collectif est là, l'expérience tout aussi profonde — et à la fin de la séance, tu entends les ressentis des autres participants, comme si vous étiez dans la même pièce.",
+        "Pas de trajet avant, pas de trajet après : tu peux rester allongé(e) aussi longtemps que tu en as besoin, et laisser la séance s'installer sans rien casser de ton rythme.",
+      ],
     },
     {
       q: "Combien de séances faut-il prévoir ?",
@@ -482,13 +492,15 @@ function FAQ({ colors }) {
                   </span>
                 </button>
                 <div style={{
-                  maxHeight: openIdx === i ? (f.photo ? 640 : 300) : 0, overflow: "hidden",
+                  maxHeight: openIdx === i ? (f.photo ? 900 : (Array.isArray(f.a) ? 420 : 300)) : 0, overflow: "hidden",
                   transition: "max-height 0.4s ease", paddingBottom: openIdx === i ? 20 : 0,
                 }}>
                   {f.photo ? (
+                    <div>
                     <div className="faq-answer-photo-grid" style={{ display: "grid",
                       gridTemplateColumns: "1fr 200px", gap: 20, alignItems: "stretch" }}>
-                      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                      <div style={{ display: "flex", flexDirection: "column",
+                        justifyContent: "center", height: "100%", gap: 12 }}>
                         {(Array.isArray(f.a) ? f.a : [f.a]).map((para, pi) => (
                           <p key={pi} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
                             color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
@@ -500,11 +512,55 @@ function FAQ({ colors }) {
                         style={{ width: "100%", height: "100%", objectFit: "cover",
                           borderRadius: 12, display: "block" }}/>
                     </div>
+                    {f.transport && (
+                      <div style={{ background: "#EAF0FA", borderRadius: 12,
+                        padding: 16, marginTop: 20 }}>
+                        <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600,
+                          fontSize: "0.88rem", color: "#1c2340", marginBottom: 12 }}>
+                          Comment venir au cabinet
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                          {f.transport.map((t, ti) => (
+                            <div key={ti} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                              {t.icon === "cable-car-svg" ? (
+                                <svg viewBox="0 0 24 24" width="17" height="17" fill="none"
+                                  stroke="#185FA5" strokeWidth="2" strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  style={{ flexShrink: 0, marginTop: 1, position: "relative", top: 2 }}>
+                                  <path d="M2 5l20 -2"/>
+                                  <path d="M12 4.5v4"/>
+                                  <rect x="6" y="9" width="12" height="9" rx="2"/>
+                                  <path d="M10 9v9"/>
+                                  <path d="M14 9v9"/>
+                                </svg>
+                              ) : (
+                                <i className={`ti ${t.icon}`} style={{ fontSize: 17, color: "#185FA5",
+                                  lineHeight: 1.5, flexShrink: 0, marginTop: 1 }}/>
+                              )}
+                              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.88rem",
+                                color: "#4a5568", lineHeight: 1.6 }}>{t.text}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {f.transportNote && (
+                          <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)",
+                            marginTop: 14, paddingTop: 12 }}>
+                            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8rem",
+                              color: "#9ca3af", lineHeight: 1.6 }}>{f.transportNote}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    </div>
                   ) : (
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-                      color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
-                      {f.a}
-                    </p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                      {(Array.isArray(f.a) ? f.a : [f.a]).map((para, pi) => (
+                        <p key={pi} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+                          color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
+                          {para}
+                        </p>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>

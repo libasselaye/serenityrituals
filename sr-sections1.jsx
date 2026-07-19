@@ -600,13 +600,17 @@ function Services({ colors }) {
                   Studio à Paris ou en ligne
                 </span>
               </div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", marginBottom: 28 }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", marginBottom: 6 }}>
                 <span style={{ fontWeight: 700, fontSize: "1.3rem", color: "#1c2340" }}>55 €</span>
                 <span style={{ color: "#6b7280", marginLeft: 4 }}>présentiel</span>
                 <span style={{ color: "#9ca3af" }}> · </span>
                 <span style={{ fontWeight: 700, fontSize: "1.3rem", color: "#1c2340" }}>39 €</span>
                 <span style={{ color: "#6b7280", marginLeft: 4 }}>en ligne</span>
               </div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontStyle: "italic",
+                fontSize: "0.85rem", color: "#6b7280", margin: "0 0 24px" }}>
+                Mêmes effets, deux ambiances.
+              </p>
               <a href={window.CALENDLY_URL} target="_blank" rel="noreferrer"
                 style={{ display: "inline-block", padding: "13px 30px",
                   background: blue, color: "#fff", borderRadius: 50,
