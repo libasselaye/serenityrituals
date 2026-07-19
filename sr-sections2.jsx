@@ -300,10 +300,22 @@ function Testimonials({ colors }) {
   const blue = colors?.blue || "#1a6fba";
   const gold = colors?.gold || "#e8b43a";
 
-  const placeholders = [
-    { text: "Témoignage client à intégrer", name: "P. M.", soin: "Activation de l'énergie vitale" },
-    { text: "Témoignage client à intégrer", name: "S. L.", soin: "Soin vibratoire La Trame" },
-    { text: "Témoignage client à intégrer", name: "A. D.", soin: "Photostimulation Dream Machine" },
+  const reviews = [
+    {
+      name: "Ani K.",
+      soin: "La Trame · Avis Google",
+      text: "J'ai découvert la Trame un peu par curiosité et je ne regrette pas du tout. Dès la fin de la séance, je me suis sentie beaucoup plus légère, apaisée, avec une sensation de bien-être que je n'avais pas ressentie depuis longtemps.",
+    },
+    {
+      name: "Yacine M.",
+      soin: "Activation de l'énergie vitale · Avis Google",
+      text: "J'ai effectué un peu moins d'une dizaine de séances avec Morgane, et chacune a été unique. L'accompagnement ne s'arrête pas à la fin d'une séance — même après, elle prend le temps de répondre aux questions.",
+    },
+    {
+      name: "Virginie C.",
+      soin: "Activation de l'énergie vitale · Avis Google",
+      text: "Après 2 expériences, j'ai été épatée par la subtilité des séances. Même si cela peut paraître impressionnant, j'en suis ressortie libérée. Accompagnement super bien maîtrisé, dans une grande bienveillance.",
+    },
   ];
 
   return (
@@ -315,38 +327,40 @@ function Testimonials({ colors }) {
             borderRadius: 2, marginBottom: 20 }}/>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 600,
-            color: "#1c2340", margin: "0 0 16px" }}>
+            color: "#1c2340", margin: 0 }}>
             Ce qu'ils en disent
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem",
-            color: "#6b7280", maxWidth: 440, margin: "0 auto", lineHeight: 1.7 }}>
-            Les témoignages authentiques de nos clients seront ajoutés ici prochainement.
-          </p>
         </RevealBox>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
-          {placeholders.map((t, i) => (
-            <RevealBox key={i} delay={i * 100}>
+          {reviews.map((t, i) => (
+            <RevealBox key={i} delay={i * 100} style={{ height: "100%" }}>
               <div style={{ background: "white", borderRadius: 24, padding: "36px 32px",
                 boxShadow: "0 4px 24px rgba(26,63,186,0.06)",
                 border: "1px solid rgba(26,111,186,0.07)",
-                position: "relative" }}>
+                position: "relative", height: "100%",
+                display: "flex", flexDirection: "column" }}>
                 <div style={{ fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "4rem", color: gold, opacity: 0.25,
                   position: "absolute", top: 12, left: 24, lineHeight: 1 }}>❝</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-                  color: "#9ca3af", lineHeight: 1.7, fontStyle: "italic",
-                  marginBottom: 28, marginTop: 28, minHeight: 80,
-                  background: "#f8faff", borderRadius: 12, padding: "16px 20px",
-                  border: "1px dashed #e5e7eb" }}>
-                  {t.text}
+                <div style={{ display: "flex", gap: 3, marginTop: 28, marginBottom: 16 }}>
+                  {[0,1,2,3,4].map(s => (
+                    <svg key={s} width="16" height="16" viewBox="0 0 24 24" fill={gold}>
+                      <path d="M12 2 L14.9 8.6 L22 9.3 L16.7 14 L18.2 21 L12 17.3 L5.8 21 L7.3 14 L2 9.3 L9.1 8.6 Z"/>
+                    </svg>
+                  ))}
                 </div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.92rem",
+                  color: "#4a5568", lineHeight: 1.7, fontStyle: "italic",
+                  marginBottom: 28, flexGrow: 1 }}>
+                  « {t.text} »
+                </p>
                 <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                   <div style={{ width: 40, height: 40, borderRadius: "50%",
                     background: `linear-gradient(135deg, ${blue}40, ${gold}40)`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontFamily: "'Cormorant Garamond', serif", fontWeight: 700,
-                    color: blue, fontSize: "1rem" }}>
+                    color: blue, fontSize: "1rem", flexShrink: 0 }}>
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -360,6 +374,25 @@ function Testimonials({ colors }) {
             </RevealBox>
           ))}
         </div>
+
+        <RevealBox style={{ textAlign: "center", marginTop: 40 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8,
+            fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem", color: "#6b7280" }}>
+            <svg width="18" height="18" viewBox="0 0 48 48">
+              <path fill="#FFC107" d="M43.6 20.5H42V20.4H24v7.2h11.3c-1.6 4.7-6.1 8.1-11.3 8.1-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l5.1-5.1C33.6 6.2 29.1 4.4 24 4.4 13.2 4.4 4.4 13.2 4.4 24S13.2 43.6 24 43.6 43.6 34.8 43.6 24c0-1.2-.1-2.4-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6 4.4C13.9 15 18.6 12 24 12c3.1 0 5.8 1.1 8 3l5.1-5.1C33.6 6.2 29.1 4.4 24 4.4c-7.5 0-14 4.3-17.7 10.3z"/>
+              <path fill="#4CAF50" d="M24 43.6c5 0 9.5-1.9 12.9-5l-6-5c-1.9 1.3-4.3 2-6.9 2-5.2 0-9.6-3.4-11.3-8.1l-6 4.7C10 39.2 16.5 43.6 24 43.6z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20.4H24v7.2h11.3c-.8 2.2-2.2 4.1-4.1 5.4l6 5c-.4.4 6.8-5 6.8-14 0-1.2-.1-2.4-.4-3.5z"/>
+            </svg>
+            <span>
+              Avis vérifiés sur Google —{" "}
+              <a href="https://share.google/xg4Eay4GCYGUfYI5t" target="_blank" rel="noopener"
+                style={{ color: blue, fontWeight: 600, textDecoration: "underline" }}>
+                voir tous les avis
+              </a>
+            </span>
+          </div>
+        </RevealBox>
       </div>
     </section>
   );
@@ -386,7 +419,14 @@ function FAQ({ colors }) {
     },
     {
       q: "Où se déroulent les séances ?",
-      a: "La Trame : en présentiel à Villeneuve-Saint-Georges, ou en ligne. L'Activation de l'énergie vitale : en studio à Paris — le lieu exact est précisé à l'ouverture de chaque séance présentielle — ou en ligne."
+      a: [
+        "La Trame : en présentiel à Villeneuve-Saint-Georges, ou en ligne.",
+        "L'Activation de l'énergie vitale : en studio à Paris — le lieu exact est précisé à l'ouverture de chaque séance présentielle — ou en ligne.",
+      ],
+      photo: {
+        src: "img/cabinet.webp",
+        alt: "Le cabinet de séance à Villeneuve-Saint-Georges : table de soin, lumière naturelle, vue sur le jardin.",
+      },
     },
     {
       q: "Comment se passe une séance en ligne ?",
@@ -442,13 +482,30 @@ function FAQ({ colors }) {
                   </span>
                 </button>
                 <div style={{
-                  maxHeight: openIdx === i ? 300 : 0, overflow: "hidden",
+                  maxHeight: openIdx === i ? (f.photo ? 640 : 300) : 0, overflow: "hidden",
                   transition: "max-height 0.4s ease", paddingBottom: openIdx === i ? 20 : 0,
                 }}>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
-                    color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
-                    {f.a}
-                  </p>
+                  {f.photo ? (
+                    <div className="faq-answer-photo-grid" style={{ display: "grid",
+                      gridTemplateColumns: "1fr 200px", gap: 20, alignItems: "stretch" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                        {(Array.isArray(f.a) ? f.a : [f.a]).map((para, pi) => (
+                          <p key={pi} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+                            color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
+                            {para}
+                          </p>
+                        ))}
+                      </div>
+                      <img src={f.photo.src} loading="lazy" alt={f.photo.alt}
+                        style={{ width: "100%", height: "100%", objectFit: "cover",
+                          borderRadius: 12, display: "block" }}/>
+                    </div>
+                  ) : (
+                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem",
+                      color: "#6b7280", lineHeight: 1.75, margin: 0 }}>
+                      {f.a}
+                    </p>
+                  )}
                 </div>
               </div>
             </RevealBox>
